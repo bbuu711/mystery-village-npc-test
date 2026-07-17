@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미스터리 마을의 NPC 생성기 | NPC Type Test</title>
+  <!-- Google Fonts for premium retro-fantasy feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Noto+Sans+KR:wght@300;400;500;700&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Layers -->
+  <div class="bg-layer bg-day"></div>
+  <div class="bg-layer bg-night" id="bg-night-layer"></div>
+
+  <!-- Ambient Audio Indicator -->
+  <div class="audio-control" id="audioControl" title="효과음 켜기/끄기">
+    <span class="audio-icon">🔊</span>
+  </div>
+
+  <div class="app-container">
+    <!-- Overlay for magical ambient particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- 1. Intro Screen -->
+    <div id="screen-intro" class="screen active">
+      <div class="card intro-card">
+        <img class="game-logo" src="logo.png" alt="토트 그 너머의 비밀">
+        
+        <div class="system-box intro-system-box" id="intro-system-box">
+          <div class="system-tag">[SYSTEM]</div>
+          <div class="system-text" id="intro-system-text">
+            마법사의 장난으로 주민들의 마음과 행동이 서로 엇갈려버린 미스터리 마을입니다. 이곳에 배치될 새로운 NPC 캐릭터를 생성합니다.
+          </div>
+          <div class="click-prompt">◀ Touch to Enter ▶</div>
+        </div>
+
+        <button class="btn btn-primary" id="btn-start" style="display:none;">NPC 생성 시작하기</button>
+      </div>
+    </div>
+
+    <!-- 2. Quiz Screen -->
+    <div id="screen-quiz" class="screen">
+      <div class="quiz-progress-container">
+        <div class="progress-label">NPC 속성 조합 중... <span id="progress-text">1 / 4</span></div>
+        <div class="progress-bar-outer">
+          <div class="progress-bar-inner" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- System Dialog Box (retro typing style) -->
+      <div class="dialog-wrapper">
+        <div class="system-box" id="quiz-system-box">
+          <div class="system-tag">[SYSTEM]</div>
+          <div class="system-text" id="quiz-system-text"></div>
+          <div class="next-indicator" id="dialog-next-indicator">▼ Click to continue</div>
+        </div>
+      </div>
+
+      <!-- Question & Options Card (Initially hidden during system message typing) -->
+      <div class="card quiz-card" id="quiz-card">
+        <h3 class="question-title" id="question-title"></h3>
+        
+        <div class="options-list" id="options-list">
+          <!-- Dynamic options will be injected here -->
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-disabled" id="btn-next" disabled>속성 주입 확인</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Result Screen -->
+    <div id="screen-result" class="screen">
+      <div class="card result-card">
+        <div class="result-header">
+          <div class="result-badge" id="result-badge">🔮</div>
+          <h2 class="result-title-label">생성 완료된 NPC 프로필</h2>
+          <h1 class="result-npc-name" id="result-npc-name">슬픈 눈의 감성 시인</h1>
+          <p class="result-tagline" id="result-tagline">#감성주의 #예술가 #따뜻한_치유</p>
+        </div>
+
+        <div class="result-body">
+          <div class="profile-section">
+            <h4 class="section-title">주민 상세 데이터</h4>
+            <p class="result-description" id="result-description">
+              마법사의 장난으로 감정이 늘 겉돌지만, 깊은 내면에는 따뜻한 온기가 가득한 NPC입니다. 
+              슬픈 눈으로 웃으며 마을 한편에서 조용히 풍경을 그리거나 음악을 연주하고 있을 거예요. 
+              이 NPC와 친해지면 숨겨진 히든 에피소드를 감상할 수 있습니다.
+            </p>
+          </div>
+
+          <!-- Radar/Bar Chart for Stats -->
+          <div class="stats-section">
+            <h4 class="section-title">NPC 성향 스탯</h4>
+            <div class="stat-bars">
+              <div class="stat-item">
+                <div class="stat-label">감성 (Emotional)</div>
+                <div class="stat-bar-wrapper">
+                  <div class="stat-bar" id="stat-emotional" style="width: 80%"></div>
+                  <span class="stat-value" id="val-emotional">80%</span>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">이성 (Rational)</div>
+                <div class="stat-bar-wrapper">
+                  <div class="stat-bar" id="stat-rational" style="width: 20%"></div>
+                  <span class="stat-value" id="val-rational">20%</span>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">사교 (Social)</div>
+                <div class="stat-bar-wrapper">
+                  <div class="stat-bar" id="stat-social" style="width: 50%"></div>
+                  <span class="stat-value" id="val-social">50%</span>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">규율 (Orderly)</div>
+                <div class="stat-bar-wrapper">
+                  <div class="stat-bar" id="stat-orderly" style="width: 40%"></div>
+                  <span class="stat-value" id="val-orderly">40%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="meta-section">
+            <div class="meta-box">
+              <span class="meta-label">추천 아이템</span>
+              <span class="meta-value" id="result-item">노을빛 엽서</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">상호작용</span>
+              <span class="meta-value" id="result-interaction">조용한 산책 동행</span>
+            </div>
+          </div>
+
+          <!-- Compatibility section -->
+          <div class="compatibility-section">
+            <div class="compat-box perfect">
+              <div class="compat-label">최상의 케미 NPC</div>
+              <div class="compat-name" id="result-compat-perfect">파티 러버 홈데코레이터</div>
+            </div>
+            <div class="compat-box worst">
+              <div class="compat-label">마찰 가능성 NPC</div>
+              <div class="compat-name" id="result-compat-worst">묵묵한 완벽주의 가이드</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-footer">
+          <button class="btn btn-secondary" id="btn-share">결과 복사</button>
+          <button class="btn btn-primary" id="btn-restart">새로운 주민 생성하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
