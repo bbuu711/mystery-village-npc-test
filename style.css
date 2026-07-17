@@ -167,6 +167,7 @@ body {
 }
 
 .game-logo {
+  opacity: 0; /* hidden initially */
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -227,7 +228,8 @@ body {
 }
 
 .system-text {
-  font-size: 0.95rem;
+  white-space: pre-line;
+  font-size: 1.15rem;
   line-height: 1.6;
   color: #f5f0eb;
   min-height: 50px;
@@ -355,7 +357,8 @@ body {
 }
 
 .question-title {
-  font-size: 1.15rem;
+  white-space: pre-line;
+  font-size: 1.35rem;
   line-height: 1.5;
   color: var(--theme-color);
   margin-bottom: 25px;
@@ -450,13 +453,15 @@ body {
 }
 
 .option-text {
-  font-size: 0.95rem;
+  white-space: pre-line;
+  font-size: 1.15rem;
   color: #e2e0ff;
   line-height: 1.5;
   transition: color 0.2s ease;
 }
 
 .option-item.selected .option-text {
+  white-space: pre-line;
   color: #fff;
   font-weight: 500;
 }
@@ -693,6 +698,7 @@ body {
     padding: 25px 15px;
   }
   .game-logo {
+  opacity: 0; /* hidden initially */
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -722,4 +728,74 @@ body {
 
 
 
+
+
+
+
+
+/* Character Animation Styles */
+.game-character {
+  position: absolute;
+  width: 60px;
+  height: 96px;
+  background-image: url('character.png');
+  background-size: 240px 96px;
+  background-position: -180px 0; /* Right facing by default */
+  pointer-events: none;
+  z-index: 1000;
+  display: none; /* Hidden until activated */
+  transform: translateX(-50%);
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
+}
+
+.game-character.walking {
+  animation: bob 0.4s infinite alternate;
+}
+
+.game-character.jumping {
+  animation: jump 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes bob {
+  0% { transform: translate(-50%, 0) rotate(-2deg); }
+  100% { transform: translate(-50%, -8px) rotate(2deg); }
+}
+
+@keyframes jump {
+  0% { transform: translate(-50%, 0) scale(1, 1); }
+  40% { transform: translate(-50%, -80px) scale(0.9, 1.1); }
+  80% { transform: translate(-50%, 0) scale(1.1, 0.9); }
+  100% { transform: translate(-50%, 0) scale(1, 1); }
+}
+
+/* Start Button Image */
+.start-btn-img {
+  opacity: 0; /* hidden initially */
+  width: 450px;
+  max-width: 80%;
+  cursor: pointer;
+  margin: 30px auto 10px auto;
+  display: block;
+  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+}
+
+.start-btn-img:hover {
+  transform: scale(1.05);
+}
+
+.start-btn-img.pressed {
+  transform: scale(0.95) translateY(10px) !important;
+  filter: drop-shadow(0 0px 0px rgba(0,0,0,0.5));
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInAnim 1.5s forwards;
+}
+
+@keyframes fadeInAnim {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 

@@ -155,43 +155,43 @@ function initParticles() {
 // --- Quiz Data ---
 const quizData = [
   {
-    systemMessage: "마법사의 장난으로 주민들의 마음과 행동이 서로 엇갈려버린 미스터리 마을입니다. 이곳에 배치될 새로운 NPC 캐릭터를 생성합니다.",
-    question: "Q1. 당신의 NPC는 주인공이 말을 걸었을 때, 어떤 '독특한 개성'으로 반응하게 만들까요?",
+    systemMessage: "[모닥불] \"반가워! 미스터리 마을로 떠나기 전에 네 성향을 동기화할게.\n평소에 어떤 스타일로 게임하는 걸 가장 좋아해?\"",
+    question: "Q1. 플레이 스타일 선택",
     options: [
-      { text: "슬픈 눈을 하고 싱긋 웃는 감성 주민", scores: { emotional: 3, social: 1 } },
-      { text: "상황을 이성적으로 분석하려는 전략가 주민", scores: { rational: 3, orderly: 1 } },
-      { text: "아기자기하게 방을 꾸미고 파티를 여는 다정한 주민", scores: { social: 3, emotional: 1 } },
-      { text: "가이드라인만 묵묵히 알려주는 완벽주의 주민", scores: { orderly: 3, rational: 1 } }
+      { text: "🎨 1 : 고장 난 주민들의 속마음 이야기를 듣고\n치료하는 스토리 중심 플레이", scores: { emotional: 3, social: 1 } },
+      { text: "⚙️ 2 : 마을이 왜 고장 났는지 원인을 분석하고\n버그를 고치는 공략 중심 플레이", scores: { rational: 3, orderly: 1 } },
+      { text: "🏡 3 : 내 방을 아기자기한 가구로 예쁘게 꾸미고\n친구들을 초대하는 힐링 중심 플레이", scores: { social: 3, emotional: 1 } },
+      { text: "🏆 4 : 규칙대로 정해진 일일 퀘스트와\n도전 과제를 완벽하게 깨는 100점 플레이", scores: { orderly: 3, rational: 1 } }
     ]
   },
   {
-    systemMessage: "NPC의 머리 위에 캘린더 모양의 '스케줄 슬롯' 신호가 켜졌습니다.",
-    question: "Q2. 주인공이 일상의 균형을 찾아주기 전까지, 당신의 NPC가 매일 반복하게 될 '숨겨진 일과'는 무엇인가요?",
+    systemMessage: "[모닥불] \"마을에 도착하니 네 머리 위에 '스케줄 슬롯'이 켜졌어.\n네가 매일 무한 반복하고 있는 '진짜 네 현실 일정'은 어때?\"",
+    question: "Q2. 나의 일상 데이터 연동",
     options: [
-      { text: "다양한 모임 일정이 무한대로 늘어나 꽉 찬 상태", scores: { social: 3, emotional: 1 } },
-      { text: "매일 정해진 시간 동안 아르바이트를 해야 하는 상태", scores: { orderly: 3, rational: 1 } },
-      { text: "상시 바캉스(여행) 계획이 있어 스케줄이 매우 유동적인 상태", scores: { emotional: 3, social: 1 } },
-      { text: "고정 일정이 없어 언제든 축제에 풀 접속 가능한 상태", scores: { rational: 3, social: 1 } }
+      { text: "📚 1 : 동아리, 팀플, 스터디, 자치 모임으로\n하루가 꽉 찬 바쁜 루틴", scores: { social: 3, emotional: 1 } },
+      { text: "💼 2 : 생활비(골드)를 벌기 위해\n고정 요일마다 꼭 가야 하는 알바 루틴", scores: { orderly: 3, rational: 1 } },
+      { text: "✈️ 3 : 언제든 바캉스나 번개 모임을 떠날 수 있게\n비워둔 즉흥 루틴", scores: { emotional: 3, social: 1 } },
+      { text: "☕ 4 : 나를 묶어두는 일정이 단 하나도 없어서\n언제든 풀 접속 가능한 루틴", scores: { rational: 3, social: 1 } }
     ]
   },
   {
-    systemMessage: "가구 상점 내부의 숨겨진 코드를 확인하자, 캐릭터 정보창 이면에 등록된 '특별한 고유 속성'이 발견되었습니다.",
-    question: "Q3. 당신의 NPC 캐릭터 데이터에 남겨둘 나만의 고유한 특징은 무엇인가요?",
+    systemMessage: "[모닥불] \"거울을 들여다보니 정보창 이면에 숨겨진 속성이 빛나기 시작해.\n네 가방 속 깊은 곳에 남겨진 '나만의 고유한 특징'은 뭐야?\"",
+    question: "Q3. 내면의 인벤토리 스캔",
     options: [
-      { text: "개성을 듬뿍 담은 멋진 '타투'를 새겨둔 특징", scores: { emotional: 3, social: 1 } },
-      { text: "성별 상관없이 동료와 '소중한 서약(결혼)'을 맺고 싶어 하는 특징", scores: { social: 3, emotional: 1 } },
-      { text: "마을 정기 신앙 소모임 활동에 성실히 참석하는 특징", scores: { orderly: 3, rational: 1 } },
-      { text: "에너지가 소진되어 따뜻한 위로와 내면 치유가 필요한 특징", scores: { rational: 3, emotional: 1 } }
+      { text: "✨ 1 : 내 개성과 독특한 취향을 표현해 둔\n'나만의 비밀 마크(문양스킨)'", scores: { emotional: 3, social: 1 } },
+      { text: "🤝 2 : 성별 상관없이 마음이 가장 잘 통하는\n소중한 친구와 '평생 단짝 서약' 맺기", scores: { social: 3, emotional: 1 } },
+      { text: "🌱 3 : 멘탈 관리를 위해 명상이나 일기 쓰기 등\n'나만의 마음 챙김 루틴'을 꼭 챙기기", scores: { orderly: 3, rational: 1 } },
+      { text: "🔮 4 : 치열한 현실 과제들에 치여 마음의 에너지가\n보라색으로 깜빡깜빡 방전된 상태", scores: { rational: 3, emotional: 1 } }
     ]
   },
   {
-    systemMessage: "모든 에피소드가 해결되면 마침내 플레이어의 '진짜 나'와 마주하는 엔딩으로 이어집니다.",
-    question: "Q4. 당신의 NPC가 마음의 안정을 찾고 새로운 시작을 맞이하기 위해, 최종적으로 풀고 싶은 '가장 소중한 소원'은 무엇인가요?",
+    systemMessage: "[모닥불] \"축하해! 주민들의 마음을 다 고쳐줬구나.\n마침내 마음의 '틈' 너머에 숨겨져 있던 진짜 소원이 나타났어.\n네가 지금 가장 풀고 싶은 소원은?\"",
+    question: "Q4. 틈새 너머의 진짜 소원",
     options: [
-      { text: "온전히 마음을 나눌 사람을 만나 예쁜 커플 스토리를 완성하는 것", scores: { social: 3, emotional: 1 } },
-      { text: "직업 스킬트리를 마스터하고 원하는 직무 취업에 성공하는 것", scores: { rational: 3, orderly: 1 } },
-      { text: "주민들과의 오해를 해결하고 평화로운 관계 도감을 채우는 것", scores: { orderly: 3, social: 1 } },
-      { text: "피로도 게이지를 비우고 아무것도 안 하며 푹 쉬는 것", scores: { emotional: 3, rational: 1 } }
+      { text: "💌 1 : 캠퍼스에서 마음이 딱 맞는 파트너를 만나\n이쁜 연애를 하는 것", scores: { social: 3, emotional: 1 } },
+      { text: "🎯 2 : 내 전공 포트폴리오를 완성해서\n원하는 꿈의 직장에 무사히 합격하는 것", scores: { rational: 3, orderly: 1 } },
+      { text: "🕊️ 3 : 주변 사람들과 오해나 싸움 없이\n상처받지 않고 사이좋게 지내는 것", scores: { orderly: 3, social: 1 } },
+      { text: "🛌 4 : 피로 게이지가 꽉 차서 지친 나에게,\n다 끄고 침대 속에서 푹 쉴 수 있는 휴식을 주는 것", scores: { emotional: 3, rational: 1 } }
     ]
   }
 ];
@@ -293,6 +293,9 @@ const resultCompatWorst = document.getElementById('result-compat-worst');
 const btnShare = document.getElementById('btn-share');
 const btnRestart = document.getElementById('btn-restart');
 
+// Character Element
+const gameCharacter = document.getElementById('game-character');
+
 // --- Helper Functions ---
 
 // Audio toggle
@@ -347,36 +350,112 @@ initParticles();
 let introText = introSystemText.textContent.trim();
 let introTypingDone = false;
 
-// Trigger typing on initial page load (with a slight delay)
-setTimeout(() => {
-  typeText(introSystemText, introText, () => {
-    introTypingDone = true;
-    btnStart.style.display = 'block';
-  });
-}, 800);
+// Trigger character walk on initial page load
+function playIntroSequence() {
+  introTypingDone = false;
+  
+  // Reset elements for fade-in
+  const gameLogo = document.querySelector('.game-logo');
+  gameLogo.classList.remove('fade-in');
+  btnStart.classList.remove('fade-in');
+  btnStart.classList.remove('pressed');
+  gameLogo.style.display = 'block';
+  btnStart.style.display = 'block';
+  introSystemBox.style.display = 'none';
+
+  // Move character back to document body if it was in the progress bar
+  document.body.insertBefore(gameCharacter, document.querySelector('.app-container'));
+
+  gameCharacter.style.display = 'block';
+  gameCharacter.style.transform = 'none'; // Reset any transform from quiz screen
+  gameCharacter.style.left = '50%';
+  gameCharacter.style.bottom = '-100px'; // start offscreen
+  gameCharacter.classList.add('walking');
+  gameCharacter.style.transition = 'bottom 2.5s linear';
+  
+  // Target position just below the start button
+  const targetBottom = window.innerHeight * 0.35; 
+  
+  setTimeout(() => {
+    gameCharacter.style.backgroundPosition = '0 0'; // back facing as it walks up
+    gameCharacter.style.bottom = `${targetBottom}px`;
+    
+    // After walking finishes
+    setTimeout(() => {
+      gameCharacter.classList.remove('walking');
+      gameCharacter.style.backgroundPosition = '-120px 0'; // Front facing
+      
+      // Force a reflow so the fade-in animation restarts
+      void gameLogo.offsetWidth;
+      void btnStart.offsetWidth;
+      
+      // Fade in logo and start button
+      gameLogo.classList.add('fade-in');
+      btnStart.classList.add('fade-in');
+      
+      // Automatically jump and press start button after fade in
+      setTimeout(() => {
+        gameCharacter.classList.add('jumping');
+        
+        // Halfway through jump, press the button
+        setTimeout(() => {
+          btnStart.classList.add('pressed');
+          // Note: audio might be blocked if no user interaction occurred yet, 
+          // but we try to play it anyway.
+          sound.playConfirm().catch(() => {}); 
+        }, 300);
+        
+        // After jump finishes
+        setTimeout(() => {
+          gameCharacter.classList.remove('jumping');
+          gameCharacter.style.display = 'none'; // hide character temporarily
+          btnStart.style.display = 'none'; // hide button
+          
+          // Show intro text box and type
+          introSystemBox.style.display = 'block';
+          typeText(introSystemText, introText, () => {
+            introTypingDone = true;
+          });
+          
+        }, 600);
+      }, 1500); // Wait 1.5s for the fade-in animation
+      
+    }, 2500);
+  }, 50);
+}
+
+setTimeout(playIntroSequence, 500);
 
 introSystemBox.addEventListener('click', () => {
   if (isTyping) {
     skipTyping(introSystemText, introText, () => {
       introTypingDone = true;
-      btnStart.style.display = 'block';
     });
   } else if (introTypingDone) {
-    startQuiz();
+    startQuiz(); // Go to quiz after intro text is acknowledged
   }
 });
 
-btnStart.addEventListener('click', (e) => {
-  e.stopPropagation();
-  startQuiz();
-});
-
 function startQuiz() {
-  sound.playClick();
   screenIntro.classList.remove('active');
   
   setTimeout(() => {
     screenQuiz.classList.add('active');
+    
+    // Move character to progress bar
+    gameCharacter.style.display = 'block';
+    const progressContainer = document.querySelector('.quiz-progress-container');
+    progressContainer.style.position = 'relative'; 
+    progressContainer.appendChild(gameCharacter);
+    
+    gameCharacter.style.transition = 'left 0.5s ease-in-out';
+    gameCharacter.style.position = 'absolute';
+    gameCharacter.style.top = '-85px'; // sit on top of the bar
+    gameCharacter.style.bottom = 'auto';
+    gameCharacter.style.left = '0%';
+    gameCharacter.style.transform = 'translateX(0)'; // Position just ahead of the line
+    gameCharacter.style.backgroundPosition = '-180px 0'; // right facing
+    
     loadQuestion(0);
   }, 400);
 }
@@ -393,11 +472,20 @@ function loadQuestion(index) {
   const qData = quizData[index];
   
   // Update progress bar
-  const progressPct = ((index) / quizData.length) * 100;
-  progressBar.style.width = `${progressPct}%`;
+  const percentage = (index / quizData.length) * 100;
+  progressBar.style.width = `${percentage}%`;
   progressText.textContent = `${index + 1} / ${quizData.length}`;
   document.documentElement.style.setProperty('--progress-ratio', index / (quizData.length - 1));
   
+  // Move character
+  if (gameCharacter) {
+    gameCharacter.classList.add('walking');
+    gameCharacter.style.left = `${percentage}%`;
+    setTimeout(() => {
+      gameCharacter.classList.remove('walking');
+    }, 500); // Stop walking after move
+  }
+
   // Hide Quiz Card (for choices)
   quizCard.style.display = 'none';
   dialogNextIndicator.style.display = 'none';
@@ -486,6 +574,16 @@ btnNext.addEventListener('click', () => {
   } else {
     // Final progress bar fills up
     progressBar.style.width = '100%';
+    
+    if (gameCharacter) {
+      gameCharacter.classList.add('walking');
+      gameCharacter.style.left = '100%';
+      setTimeout(() => {
+        gameCharacter.classList.remove('walking');
+        gameCharacter.style.display = 'none'; // hide character before result screen
+      }, 500);
+    }
+    
     showResults();
   }
 });
@@ -569,13 +667,7 @@ btnRestart.addEventListener('click', () => {
   
   setTimeout(() => {
     screenIntro.classList.add('active');
-    // Restart typing intro text
-    introTypingDone = false;
-    btnStart.style.display = 'none';
-    typeText(introSystemText, introText, () => {
-      introTypingDone = true;
-      btnStart.style.display = 'block';
-    });
+    playIntroSequence();
   }, 500);
 });
 

@@ -20,6 +20,7 @@
     <span class="audio-icon">🔊</span>
   </div>
 
+  <div class="game-character" id="game-character"></div>
   <div class="app-container">
     <!-- Overlay for magical ambient particles -->
     <div class="particles" id="particles"></div>
@@ -29,15 +30,15 @@
       <div class="card intro-card">
         <img class="game-logo" src="logo.png" alt="토트 그 너머의 비밀">
         
-        <div class="system-box intro-system-box" id="intro-system-box">
+        <img id="btn-start" class="start-btn-img" src="start-btn-brown.png" alt="START">
+        
+        <div class="system-box intro-system-box" id="intro-system-box" style="display:none;">
           <div class="system-tag">[SYSTEM]</div>
           <div class="system-text" id="intro-system-text">
             마법사의 장난으로 주민들의 마음과 행동이 서로 엇갈려버린 미스터리 마을입니다. 이곳에 배치될 새로운 NPC 캐릭터를 생성합니다.
           </div>
           <div class="click-prompt">◀ Touch to Enter ▶</div>
         </div>
-
-        <button class="btn btn-primary" id="btn-start" style="display:none;">NPC 생성 시작하기</button>
       </div>
     </div>
 
