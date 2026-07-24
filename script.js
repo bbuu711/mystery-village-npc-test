@@ -158,20 +158,20 @@ const quizData = [
     systemMessage: "[모닥불] \"반가워! 미스터리 마을로 떠나기 전에 네 성향을 동기화할게.\n평소에 어떤 스타일로 게임하는 걸 가장 좋아해?\"",
     question: "Q1. 플레이 스타일 선택",
     options: [
-      { text: "🎨 1 : 고장 난 주민들의 속마음 이야기를 듣고\n치료하는 스토리 중심 플레이", scores: { emotional: 3, social: 1 } },
-      { text: "⚙️ 2 : 마을이 왜 고장 났는지 원인을 분석하고\n버그를 고치는 공략 중심 플레이", scores: { rational: 3, orderly: 1 } },
-      { text: "🏡 3 : 내 방을 아기자기한 가구로 예쁘게 꾸미고\n친구들을 초대하는 힐링 중심 플레이", scores: { social: 3, emotional: 1 } },
-      { text: "🏆 4 : 규칙대로 정해진 일일 퀘스트와\n도전 과제를 완벽하게 깨는 100점 플레이", scores: { orderly: 3, rational: 1 } }
+      { text: "🎨 1 : 고장 난 주민들의 속마음 이야기를 듣고\n치료하는 스토리 중심 플레이", scores: { emotional: 3, social: 1 }, item: "🎨" },
+      { text: "⚙️ 2 : 마을이 왜 고장 났는지 원인을 분석하고\n버그를 고치는 공략 중심 플레이", scores: { rational: 3, orderly: 1 }, item: "⚙️" },
+      { text: "🏡 3 : 내 방을 아기자기한 가구로 예쁘게 꾸미고\n친구들을 초대하는 힐링 중심 플레이", scores: { social: 3, emotional: 1 }, item: "🏡" },
+      { text: "🏆 4 : 규칙대로 정해진 일일 퀘스트와\n도전 과제를 완벽하게 깨는 100점 플레이", scores: { orderly: 3, rational: 1 }, item: "🏆" }
     ]
   },
   {
     systemMessage: "[모닥불] \"마을에 도착하니 네 머리 위에 '스케줄 슬롯'이 켜졌어.\n네가 매일 무한 반복하고 있는 '진짜 네 현실 일정'은 어때?\"",
     question: "Q2. 나의 일상 데이터 연동",
     options: [
-      { text: "📚 1 : 동아리, 팀플, 스터디, 자치 모임으로\n하루가 꽉 찬 바쁜 루틴", scores: { social: 3, emotional: 1 } },
-      { text: "💼 2 : 생활비(골드)를 벌기 위해\n고정 요일마다 꼭 가야 하는 알바 루틴", scores: { orderly: 3, rational: 1 } },
-      { text: "✈️ 3 : 언제든 바캉스나 번개 모임을 떠날 수 있게\n비워둔 즉흥 루틴", scores: { emotional: 3, social: 1 } },
-      { text: "☕ 4 : 나를 묶어두는 일정이 단 하나도 없어서\n언제든 풀 접속 가능한 루틴", scores: { rational: 3, social: 1 } }
+      { text: "📚 1 : 동아리, 팀플, 스터디, 자치 모임으로\n하루가 꽉 찬 바쁜 루틴", scores: { social: 3, emotional: 1 }, item: "🏡" },
+      { text: "💼 2 : 생활비(골드)를 벌기 위해\n고정 요일마다 꼭 가야 하는 알바 루틴", scores: { orderly: 3, rational: 1 }, item: "🏆" },
+      { text: "✈️ 3 : 언제든 바캉스나 번개 모임을 떠날 수 있게\n비워둔 즉흥 루틴", scores: { emotional: 3, social: 1 }, item: "🎨" },
+      { text: "☕ 4 : 나를 묶어두는 일정이 단 하나도 없어서\n언제든 풀 접속 가능한 루틴", scores: { rational: 3, social: 1 }, item: "☕" }
     ]
   },
   {
@@ -181,7 +181,7 @@ const quizData = [
       { text: "✨ 1 : 내 개성과 독특한 취향을 표현해 둔\n'나만의 비밀 마크(문양스킨)'", scores: { emotional: 3, social: 1 } },
       { text: "🤝 2 : 성별 상관없이 마음이 가장 잘 통하는\n소중한 친구와 '평생 단짝 서약' 맺기", scores: { social: 3, emotional: 1 } },
       { text: "🌱 3 : 멘탈 관리를 위해 명상이나 일기 쓰기 등\n'나만의 마음 챙김 루틴'을 꼭 챙기기", scores: { orderly: 3, rational: 1 } },
-      { text: "🔮 4 : 치열한 현실 과제들에 치여 마음의 에너지가\n보라색으로 깜빡깜빡 방전된 상태", scores: { rational: 3, emotional: 1 } }
+      { text: "🔮 4 : 치열한 현실 과제들에 치여 마음의 에너지가\n보라색으로 깜빡깜빡 방전된 상태", scores: { rational: 3, emotional: 1 }, item: "🔮" }
     ]
   },
   {
@@ -189,9 +189,9 @@ const quizData = [
     question: "Q4. 틈새 너머의 진짜 소원",
     options: [
       { text: "💌 1 : 캠퍼스에서 마음이 딱 맞는 파트너를 만나\n이쁜 연애를 하는 것", scores: { social: 3, emotional: 1 } },
-      { text: "🎯 2 : 내 전공 포트폴리오를 완성해서\n원하는 꿈의 직장에 무사히 합격하는 것", scores: { rational: 3, orderly: 1 } },
+      { text: "🎯 2 : 내 전공 포트폴리오를 완성해서\n원하는 꿈의 직장에 무사히 합격하는 것", scores: { rational: 3, orderly: 1 }, item: "⚙️" },
       { text: "🕊️ 3 : 주변 사람들과 오해나 싸움 없이\n상처받지 않고 사이좋게 지내는 것", scores: { orderly: 3, social: 1 } },
-      { text: "🛌 4 : 피로 게이지가 꽉 차서 지친 나에게,\n다 끄고 침대 속에서 푹 쉴 수 있는 휴식을 주는 것", scores: { emotional: 3, rational: 1 } }
+      { text: "🛌 4 : 피로 게이지가 꽉 차서 지친 나에게,\n다 끄고 침대 속에서 푹 쉴 수 있는 휴식을 주는 것", scores: { emotional: 3, rational: 1 }, item: "🛌" }
     ]
   }
 ];
@@ -242,6 +242,8 @@ const archetypes = {
 
 // --- App State ---
 let currentQuestionIndex = 0;
+let equippedItems = [];
+
 let selectedOptionIndex = null;
 let userScores = {
   emotional: 0,
@@ -290,8 +292,8 @@ const resultInteraction = document.getElementById('result-interaction');
 const resultCompatPerfect = document.getElementById('result-compat-perfect');
 const resultCompatWorst = document.getElementById('result-compat-worst');
 
-const btnShare = document.getElementById('btn-share');
-const btnRestart = document.getElementById('btn-restart');
+
+const btnSubmit = document.getElementById('btn-submit');
 
 // Character Element
 const gameCharacter = document.getElementById('game-character');
@@ -424,7 +426,114 @@ function playIntroSequence() {
   }, 50);
 }
 
-setTimeout(playIntroSequence, 500);
+
+// --------------------------------------------------
+// Story Sequence Logic
+// --------------------------------------------------
+const screenStory = document.getElementById('screen-story');
+const screenForm = document.getElementById('screen-form');
+const storySystemBox = document.getElementById('story-system-box');
+const storySystemText = document.getElementById('story-system-text');
+const storyNextIndicator = document.getElementById('story-next-indicator');
+const btnToIntro = document.getElementById('btn-to-intro');
+
+const betaName = document.getElementById('beta-name');
+const betaContact = document.getElementById('beta-contact');
+const betaAge = document.getElementById('beta-age');
+const betaJob = document.getElementById('beta-job');
+const betaAgree = document.getElementById('beta-agree');
+
+const storyPages = [
+  "평화로운 마을에 살던 주인공. 어느 날, 알 수 없는 이유로 모든 것이 엇갈려버린 '미스터리 마을'에 떨어지게 되었습니다.",
+  "집으로 돌아가기 위해서는 흩어진 '조각'을 모두 모아야 합니다.",
+  "미스터리 마을의 주민들을 치유하면서 점점 마을의 비밀에 다다르게 되는데..."
+];
+const finalStoryLine = "<br><br><span id='final-story-line'></span>";
+
+let currentStoryIndex = 0;
+let isStoryTypingDone = false;
+let storyTimer = null;
+
+function loadStoryPage(index) {
+  isStoryTypingDone = false;
+  storyNextIndicator.style.display = 'none';
+  const text = storyPages[index];
+  
+  typeText(storySystemText, text, () => {
+    if (index === 2) {
+      storyTimer = setTimeout(() => {
+        storySystemText.innerHTML += "<br><br><span id='final-story-line'></span>";
+        const finalEl = document.getElementById('final-story-line');
+        typeText(finalEl, "과연 주인공은 집으로 돌아갈 수 있을까요?", () => {
+          isStoryTypingDone = true;
+          storyNextIndicator.style.display = 'block';
+        });
+      }, 1200); // 1.2s pause
+    } else {
+      isStoryTypingDone = true;
+      storyNextIndicator.style.display = 'block';
+    }
+  });
+}
+
+setTimeout(() => {
+  if (document.getElementById('screen-story')) {
+    loadStoryPage(currentStoryIndex);
+  }
+}, 500);
+
+if (storySystemBox) {
+  storySystemBox.addEventListener('click', () => {
+    if (isTyping || (currentStoryIndex === 2 && !isStoryTypingDone)) {
+      clearTimeout(storyTimer);
+      skipTyping(storySystemText, storyPages[currentStoryIndex], () => {
+        if (currentStoryIndex === 2) {
+          storySystemText.innerHTML = storyPages[currentStoryIndex] + "<br><br>과연 주인공은 집으로 돌아갈 수 있을까요?";
+        }
+        isStoryTypingDone = true;
+        storyNextIndicator.style.display = 'block';
+      });
+    } else if (isStoryTypingDone) {
+      currentStoryIndex++;
+      if (currentStoryIndex < storyPages.length) {
+        loadStoryPage(currentStoryIndex);
+      } else {
+        sound.playClick();
+        screenStory.classList.remove('active');
+        screenForm.classList.add('active');
+      }
+    }
+  });
+}
+
+function checkFormValidity() {
+  if (betaName && betaAge && betaJob && betaContact && betaAgree) {
+    if (betaName.value.trim() !== '' && betaAge.value.trim() !== '' && betaJob.value.trim() !== '' && betaContact.value.trim() !== '' && betaAgree.checked) {
+      btnToIntro.disabled = false;
+      btnToIntro.classList.remove('btn-disabled');
+    } else {
+      btnToIntro.disabled = true;
+      btnToIntro.classList.add('btn-disabled');
+    }
+  }
+}
+
+if (betaName) {
+  betaName.addEventListener('input', checkFormValidity);
+  betaContact.addEventListener('input', checkFormValidity);
+  betaAge.addEventListener('input', checkFormValidity);
+  betaJob.addEventListener('input', checkFormValidity);
+  betaAgree.addEventListener('change', checkFormValidity);
+  
+  btnToIntro.addEventListener('click', () => {
+    if (btnToIntro.disabled) return;
+    sound.playClick();
+    screenForm.classList.remove('active');
+    screenIntro.classList.add('active');
+    playIntroSequence();
+  });
+}
+
 
 introSystemBox.addEventListener('click', () => {
   if (isTyping) {
@@ -537,6 +646,34 @@ quizSystemBox.addEventListener('click', () => {
     quizCard.style.display = 'block';
   }
 });
+
+function renderEquippedItems() {
+  const container = document.getElementById('equipped-items');
+  if (!container) return;
+  container.innerHTML = '';
+  equippedItems.forEach((item, idx) => {
+    if (item) {
+      const el = document.createElement('div');
+      el.className = 'eq-item eq-item-' + idx;
+      el.textContent = item;
+      container.appendChild(el);
+    }
+  });
+}
+
+function renderEquippedItems() {
+  const container = document.getElementById('equipped-items');
+  if (!container) return;
+  container.innerHTML = '';
+  equippedItems.forEach((item, idx) => {
+    if (item) {
+      const el = document.createElement('div');
+      el.className = 'eq-item eq-item-' + idx;
+      el.textContent = item;
+      container.appendChild(el);
+    }
+  });
+}
 
 function selectOption(index) {
   sound.playClick();
@@ -653,42 +790,63 @@ function animateStatBar(barEl, valEl, targetValue) {
   }, 12);
 }
 
-// Restart button
-btnRestart.addEventListener('click', () => {
+
+// Submit button
+btnSubmit.addEventListener('click', async () => {
   sound.playClick();
   
-  // Reset state
-  userScores = { emotional: 0, rational: 0, social: 0, orderly: 0 };
-  currentQuestionIndex = 0;
-  selectedOptionIndex = null;
+  if (btnSubmit.disabled) return;
   
-  screenResult.classList.remove('active');
-  document.documentElement.style.setProperty('--progress-ratio', 0);
-  
-  setTimeout(() => {
-    screenIntro.classList.add('active');
-    playIntroSequence();
-  }, 500);
+  btnSubmit.disabled = true;
+  const originalText = btnSubmit.textContent;
+  btnSubmit.textContent = "저장 중...";
+  btnSubmit.style.opacity = "0.7";
+
+  try {
+    const npcTypeEl = document.getElementById('result-npc-name');
+    const npcType = npcTypeEl ? npcTypeEl.textContent : 'Unknown';
+    const itemsStr = equippedItems.filter(i => i).join(', ');
+
+    const payload = {
+      name: betaName ? betaName.value.trim() : "Unknown",
+      age_desc: betaAge ? betaAge.value.trim() : "Unknown",
+      job: betaJob ? betaJob.value.trim() : "Unknown",
+      contact: betaContact ? betaContact.value.trim() : "Unknown",
+      npc_type: npcType,
+      items: itemsStr
+    };
+    const response = await fetch("https://btnrstfbvynsmzzxwcfy.supabase.co/rest/v1/beta_testers", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0bnJzdGZidnluc216enh3Y2Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ4OTU2OTcsImV4cCI6MjEwMDQ3MTY5N30.-fhusuRmMexuUTwUT4R9ZX1oFM5l1R57xyj3BvW5Y_Y",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ0bnJzdGZidnluc216enh3Y2Z5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ4OTU2OTcsImV4cCI6MjEwMDQ3MTY5N30.-fhusuRmMexuUTwUT4R9ZX1oFM5l1R57xyj3BvW5Y_Y",
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error("서버 응답 오류: " + response.status);
+    }
+
+    alert("베타테스트 결과가 성공적으로 제출되었습니다!\n소중한 의견 감사드립니다.");
+    btnSubmit.textContent = "제출 완료";
+    btnSubmit.style.background = "#4CAF50"; // Green color
+    btnSubmit.style.color = "#fff";
+    btnSubmit.style.opacity = "1";
+    // Keep it disabled so they don't submit twice
+  } catch (error) {
+    console.error("Submission error:", error);
+    alert("데이터 저장 중 오류가 발생했습니다. 다시 시도해 주세요.");
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = originalText;
+    btnSubmit.style.opacity = "1";
+  }
 });
 
-// Share / Copy Results Code Button
-btnShare.addEventListener('click', () => {
+// Submit button
+btnSubmit.addEventListener('click', () => {
   sound.playClick();
-  
-  const summary = `🔮 [미스터리 마을 NPC 생성 결과] 🔮\n\n내가 생성한 NPC: ${resultNpcName.textContent}\n${resultTagline.textContent}\n\n성향 스탯:\n- 감성: ${valEmotional.textContent}\n- 이성: ${valRational.textContent}\n- 사교: ${valSocial.textContent}\n- 규율: ${valOrderly.textContent}\n\n지금 미스터리 마을 주민을 생성해보세요!`;
-  
-  navigator.clipboard.writeText(summary).then(() => {
-    const originalText = btnShare.textContent;
-    btnShare.textContent = '복사 완료!';
-    btnShare.style.background = 'rgba(34, 197, 94, 0.2)';
-    btnShare.style.borderColor = '#22c55e';
-    
-    setTimeout(() => {
-      btnShare.textContent = originalText;
-      btnShare.style.background = 'rgba(255, 255, 255, 0.05)';
-      btnShare.style.borderColor = 'rgba(255, 255, 255, 0.15)';
-    }, 2000);
-  }).catch(err => {
-    console.error('클립보드 복사 실패:', err);
-  });
+  alert("베타테스트 결과가 성공적으로 제출되었습니다!\n소중한 의견 감사드립니다.");
 });

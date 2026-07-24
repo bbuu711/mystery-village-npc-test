@@ -20,13 +20,58 @@
     <span class="audio-icon">🔊</span>
   </div>
 
-  <div class="game-character" id="game-character"></div>
+  <div class="game-character" id="game-character"><div class="equipped-items" id="equipped-items"></div></div>
   <div class="app-container">
     <!-- Overlay for magical ambient particles -->
     <div class="particles" id="particles"></div>
 
+
+    <!-- 0-A. Story Sequence Screen -->
+    <div id="screen-story" class="screen active">
+      <div class="dialog-wrapper">
+        <div class="system-box" id="story-system-box">
+          <div class="system-tag">[SYSTEM]</div>
+          <div class="system-text" id="story-system-text"></div>
+          <div class="next-indicator" id="story-next-indicator">▶ Touch to continue</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 0-B. Custom Beta Tester Form Screen -->
+    <div id="screen-form" class="screen">
+      <div class="form-wrapper custom-form">
+        <h3 class="form-title">📝 베타테스터 모집</h3>
+        <p class="form-desc">틈 너머의 비밀에 함께하실 테스터를 모집합니다.<br>항목을 작성해야 본 테스트를 시작할 수 있습니다.</p>
+        
+        <div class="form-group">
+          <label>1. 이름 <span style="color:#ff6b6b;">*</span></label>
+          <input type="text" id="beta-name" placeholder="이름을 입력해주세요">
+        </div>
+        <div class="form-group">
+          <label>2. 나이/설명 <span style="color:#ff6b6b;">*</span></label>
+          <input type="text" id="beta-age" placeholder="예: 21살 / 여성">
+        </div>
+        <div class="form-group">
+          <label>3. 직업 (학생, 직장인 등) <span style="color:#ff6b6b;">*</span></label>
+          <input type="text" id="beta-job" placeholder="직업을 입력해주세요">
+        </div>
+        <div class="form-group">
+          <label>4. 연락처 <span style="color:#ff6b6b;">*</span><br><span style="font-size:12px;color:#aaa;font-weight:normal;">(추첨을 통해 소정의 상품을 보내드립니다)</span></label>
+          <input type="text" id="beta-contact" placeholder="연락처를 입력해주세요">
+        </div>
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="beta-agree">
+          <label for="beta-agree">개인정보 수집 및 이용에 동의합니다. <span style="color:#ff6b6b;">*</span></label>
+        </div>
+        
+        <p style="color:#aaa; font-size:13px; margin-bottom: 10px; text-align:center; line-height: 1.4;">다음으로는 마을 '주민'에 관한 아이디어 모집을 위한<br>간단한 "유형테스트"입니다.</p>
+        <button class="btn btn-disabled" id="btn-to-intro" disabled>NPC 유형 테스트 시작하기</button>
+      </div>
+    </div>
+
     <!-- 1. Intro Screen -->
-    <div id="screen-intro" class="screen active">
+    <div id="screen-intro" class="screen">
+
       <div class="card intro-card">
         <img class="game-logo" src="logo.png" alt="토트 그 너머의 비밀">
         
@@ -85,6 +130,7 @@
         </div>
 
         <div class="result-body">
+          <div class="result-character-preview" id="result-character-preview"></div>
           <div class="profile-section">
             <h4 class="section-title">주민 상세 데이터</h4>
             <p class="result-description" id="result-description">
@@ -154,8 +200,7 @@
         </div>
 
         <div class="result-footer">
-          <button class="btn btn-secondary" id="btn-share">결과 복사</button>
-          <button class="btn btn-primary" id="btn-restart">새로운 주민 생성하기</button>
+          <button class="btn btn-primary" id="btn-submit" style="background:#ffd700; color:#000; width:100%; border:none; font-weight:bold; font-size: 22px; padding: 20px 0; border-radius: 12px; margin-top: 15px; box-shadow: 0 4px 15px rgba(255,215,0,0.4);">제출</button>
         </div>
       </div>
     </div>
