@@ -390,76 +390,17 @@ let introTypingDone = false;
 function playIntroSequence() {
   introTypingDone = false;
   
-  // Reset elements for fade-in
-  const gameLogo = document.querySelector('.game-logo');
-  gameLogo.classList.remove('fade-in');
-  btnStart.classList.remove('fade-in');
-  btnStart.classList.remove('pressed');
-  gameLogo.style.display = 'block';
-  btnStart.style.display = 'block';
-  introSystemBox.style.display = 'none';
-
-  // Move character back to document body if it was in the progress bar
-  document.body.insertBefore(gameCharacter, document.querySelector('.app-container'));
-
-  gameCharacter.style.display = 'block';
-  gameCharacter.style.transform = 'none'; // Reset any transform from quiz screen
-  gameCharacter.style.left = '50%';
-  gameCharacter.style.bottom = '-100px'; // start offscreen
-  gameCharacter.classList.add('walking');
-  gameCharacter.style.transition = 'bottom 2.5s linear';
+  // Show intro text box and type immediately
+  btnStart.style.display = 'none'; 
+  introSystemBox.style.display = 'block';
   
-  // Target position just below the start button
-  const targetBottom = window.innerHeight * 0.35; 
-  
-  setTimeout(() => {
-    gameCharacter.style.backgroundPosition = '0 0'; // back facing as it walks up
-    gameCharacter.style.bottom = `${targetBottom}px`;
-    
-    // After walking finishes
-    setTimeout(() => {
-      gameCharacter.classList.remove('walking');
-      gameCharacter.style.backgroundPosition = '-120px 0'; // Front facing
-      
-      // Force a reflow so the fade-in animation restarts
-      void gameLogo.offsetWidth;
-      void btnStart.offsetWidth;
-      
-      // Fade in logo and start button
-      gameLogo.classList.add('fade-in');
-      btnStart.classList.add('fade-in');
-      
-      // Automatically jump and press start button after fade in
-      setTimeout(() => {
-        gameCharacter.classList.add('jumping');
-        
-        // Halfway through jump, press the button
-        setTimeout(() => {
-          btnStart.classList.add('pressed');
-          // Note: audio might be blocked if no user interaction occurred yet, 
-          // but we try to play it anyway.
-          sound.playConfirm().catch(() => {}); 
-        }, 300);
-        
-        // After jump finishes
-        setTimeout(() => {
-          gameCharacter.classList.remove('jumping');
-          gameCharacter.style.display = 'none'; // hide character temporarily
-          btnStart.style.display = 'none'; // hide button
-          
-          // Show intro text box and type
-          introSystemBox.style.display = 'block';
-          typeText(introSystemText, introText, () => {
-            introTypingDone = true;
-          });
-          
-        }, 600);
-      }, 1500); // Wait 1.5s for the fade-in animation
-      
-    }, 2500);
-  }, 50);
+  // Ensure game character is hidden in intro
+  if (gameCharacter) gameCharacter.style.display = 'none';
+
+  typeText(introSystemText, introText, () => {
+    introTypingDone = true;
+  });
 }
-
 
 // --------------------------------------------------
 // Story Sequence Logic
@@ -564,7 +505,7 @@ if (betaName) {
     sound.playClick();
     screenForm.classList.remove('active');
     screenIntro.classList.add('active');
-    playIntroSequence();
+    // playIntroSequence();
   });
 }
 
@@ -895,4 +836,9 @@ btnSubmit.addEventListener('click', async () => {
 btnSubmit.addEventListener('click', () => {
   sound.playClick();
   alert("베타테스트 결과가 성공적으로 제출되었습니다!\n소중한 의견 감사드립니다.");
+});
+
+btnStart.addEventListener('click', () => {
+  sound.playConfirm();
+  playIntroSequence();
 });
