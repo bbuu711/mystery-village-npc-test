@@ -390,56 +390,26 @@ let introTypingDone = false;
 function playIntroSequence() {
   introTypingDone = false;
   
-  // Hide the start button smoothly
-  btnStart.style.opacity = '0';
-  btnStart.style.transform = 'translateY(15px) scale(0.95)';
-  btnStart.style.pointerEvents = 'none';
-  
-  // Target correct back-facing Aria character
-  const introChar = document.getElementById('intro-character');
-  
-  // Set initial position at the bottom-center of the screen
-  introChar.style.display = 'block';
-  introChar.style.left = '50%';
-  introChar.style.bottom = '10px';
-  introChar.style.transform = 'translateX(-50%) scale(1.4)';
-  introChar.style.opacity = '1';
-  introChar.style.transition = 'none';
-  introChar.classList.add('walking');
-  
-  // Force a reflow
-  void introChar.offsetWidth;
-  
-  // Animate the back-facing Aria walking UP (towards the portal door), scaling down (depth), and fading away
-  introChar.style.transition = 'bottom 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1.8s ease-in 0.4s';
-  introChar.style.bottom = '230px'; // Move up towards portal center
-  introChar.style.transform = 'translateX(-50%) scale(0.55)'; // Simulates distance
-  introChar.style.opacity = '0'; // Disappears into portal light
-  
-  // Concurrently darken and blur background
+  // Darken background immediately
   const introScreen = document.getElementById('screen-intro');
   introScreen.classList.add('darkened');
   
-  // Wait for the walking animation to finish before showing the notice box
-  setTimeout(() => {
-    btnStart.style.display = 'none';
-    introChar.classList.remove('walking');
-    introChar.style.display = 'none';
-    
-    introSystemBox.style.display = 'block';
-    introSystemBox.style.opacity = '0';
-    introSystemBox.style.transform = 'translateY(10px)';
-    
-    // Trigger transition
-    void introSystemBox.offsetWidth;
-    introSystemBox.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    introSystemBox.style.opacity = '1';
-    introSystemBox.style.transform = 'translateY(0)';
-    
-    typeText(introSystemText, introText, () => {
-      introTypingDone = true;
-    });
-  }, 2200);
+  // Hide start button immediately
+  btnStart.style.display = 'none';
+  
+  // Hide Aria character if present
+  const introChar = document.getElementById('intro-character');
+  if (introChar) introChar.style.display = 'none';
+  
+  // Show intro system notice box immediately
+  introSystemBox.style.display = 'block';
+  introSystemBox.style.opacity = '1';
+  introSystemBox.style.transform = 'translateY(0)';
+  
+  // Start typing the bonfire text
+  typeText(introSystemText, introText, () => {
+    introTypingDone = true;
+  });
 }
 
 // --------------------------------------------------

@@ -976,8 +976,8 @@ body {
   min-height: 580px; /* Give it ample height so the door and walking character are visible */
   border-radius: 24px;
   overflow: hidden;
-  border: 2.5px solid #fde047; /* Yellow border for the entire screen to match system theme */
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(253, 224, 71, 0.15);
+  border: 2.5px solid #a855f7; /* Purple border for the intro screen */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.25);
 }
 
 /* Base overlay: completely transparent and clear initially */
