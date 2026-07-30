@@ -395,37 +395,36 @@ function playIntroSequence() {
   btnStart.style.transform = 'translateY(15px) scale(0.95)';
   btnStart.style.pointerEvents = 'none';
   
-  // Move and setup the walking character inside the intro screen
-  const introScreen = document.getElementById('screen-intro');
-  introScreen.appendChild(gameCharacter);
+  // Target correct back-facing Aria character
+  const introChar = document.getElementById('intro-character');
   
   // Set initial position at the bottom-center of the screen
-  gameCharacter.style.display = 'block';
-  gameCharacter.style.left = '50%';
-  gameCharacter.style.bottom = '20px';
-  gameCharacter.style.transform = 'translateX(-50%) scale(1.4)';
-  gameCharacter.style.backgroundPosition = '0 0'; // Back facing sprite
-  gameCharacter.style.opacity = '1';
-  gameCharacter.style.transition = 'none';
-  gameCharacter.classList.add('walking');
+  introChar.style.display = 'block';
+  introChar.style.left = '50%';
+  introChar.style.bottom = '10px';
+  introChar.style.transform = 'translateX(-50%) scale(1.4)';
+  introChar.style.opacity = '1';
+  introChar.style.transition = 'none';
+  introChar.classList.add('walking');
   
   // Force a reflow
-  void gameCharacter.offsetWidth;
+  void introChar.offsetWidth;
   
-  // Animate the character walking UP (towards the door), scaling down (depth), and fading away
-  gameCharacter.style.transition = 'bottom 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1.8s ease-in 0.4s';
-  gameCharacter.style.bottom = '220px'; // Path leads to the door
-  gameCharacter.style.transform = 'translateX(-50%) scale(0.6)'; // Simulates distance
-  gameCharacter.style.opacity = '0'; // Disappears into the portal
+  // Animate the back-facing Aria walking UP (towards the portal door), scaling down (depth), and fading away
+  introChar.style.transition = 'bottom 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1.8s ease-in 0.4s';
+  introChar.style.bottom = '230px'; // Move up towards portal center
+  introChar.style.transform = 'translateX(-50%) scale(0.55)'; // Simulates distance
+  introChar.style.opacity = '0'; // Disappears into portal light
   
   // Concurrently darken and blur background
+  const introScreen = document.getElementById('screen-intro');
   introScreen.classList.add('darkened');
   
   // Wait for the walking animation to finish before showing the notice box
   setTimeout(() => {
     btnStart.style.display = 'none';
-    gameCharacter.classList.remove('walking');
-    gameCharacter.style.display = 'none';
+    introChar.classList.remove('walking');
+    introChar.style.display = 'none';
     
     introSystemBox.style.display = 'block';
     introSystemBox.style.opacity = '0';
