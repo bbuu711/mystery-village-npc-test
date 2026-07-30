@@ -17,7 +17,7 @@ body {
 }
 
 :root {
-  --theme-color: #c084fc;
+  --theme-color: #fde047;
   --progress-ratio: 0;
 }
 
@@ -178,7 +178,7 @@ body {
 .intro-card {
   text-align: center;
   padding: 50px 30px;
-  border: 1px solid color-mix(in srgb, var(--theme-color) 20%, transparent);
+  border: 1.5px solid #fde047;
 }
 
 .game-logo {
@@ -422,7 +422,7 @@ body {
 }
 
 .option-item.selected {
-  background: color-mix(in srgb, var(--theme-color) 10%, transparent);
+  background: rgba(253, 224, 71, 0.12);
   border-color: var(--theme-color);
   box-shadow: 0 4px 15px color-mix(in srgb, var(--theme-color) 15%, transparent);
 }
@@ -518,8 +518,8 @@ body {
 /* 3. Result Screen CSS */
 .result-card {
   padding: 40px 25px;
-  border: 1.5px solid color-mix(in srgb, var(--theme-color) 30%, transparent);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px color-mix(in srgb, var(--theme-color) 15%, transparent);
+  border: 2px solid #fde047;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(253, 224, 71, 0.2);
   animation: resultIntro 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -852,7 +852,7 @@ body {
   background: rgba(26, 20, 35, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 215, 255, 0.2);
+  border: 1.5px solid rgba(253, 224, 71, 0.2);
   border-radius: 16px;
   padding: 20px;
   width: 90%;
@@ -896,7 +896,7 @@ body {
 .form-group input[type="text"],
 .form-group textarea {
   background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 215, 255, 0.3);
+  border: 1.5px solid rgba(253, 224, 71, 0.25);
   border-radius: 8px;
   padding: 12px;
   color: #fff;
@@ -907,7 +907,7 @@ body {
 .form-group input[type="text"]:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #ffd7ff;
+  border-color: #fde047;
 }
 .checkbox-group {
   flex-direction: row;
@@ -973,6 +973,11 @@ body {
   background-position: center;
   position: relative;
   transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 580px; /* Give it ample height so the door and walking character are visible */
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2.5px solid #fde047; /* Yellow border for the entire screen to match system theme */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(253, 224, 71, 0.15);
 }
 
 /* Base overlay: completely transparent and clear initially */
@@ -997,48 +1002,49 @@ body {
 
 #screen-intro .intro-card {
   z-index: 1;
-  position: relative;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  height: 100%;
-  padding-bottom: 50px;
+  padding: 40px 20px;
   background: none !important;
   border: none !important;
   box-shadow: none !important;
 }
 
 .door-btn {
-  background: rgba(29, 9, 54, 0.85);
-  border: 2px solid #a855f7;
+  background: rgba(20, 10, 5, 0.9);
+  border: 2.5px solid #fde047;
   border-radius: 8px;
-  color: #f3e8ff;
+  color: #fde047;
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 18px;
+  font-weight: 700;
   padding: 16px 32px;
   cursor: pointer;
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 4px 20px rgba(253, 224, 71, 0.3);
   animation: pulseBtn 2s infinite;
   z-index: 2;
 }
 
 .door-btn:hover {
-  background: rgba(155, 89, 182, 0.8);
+  background: rgba(253, 224, 71, 0.2);
   color: #fff;
   transform: translateY(-2px);
 }
 
 @keyframes pulseBtn {
-  0% { box-shadow: 0 0 0 0 rgba(155, 89, 182, 0.7); }
-  70% { box-shadow: 0 0 0 15px rgba(155, 89, 182, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(155, 89, 182, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(253, 224, 71, 0.6); }
+  70% { box-shadow: 0 0 0 15px rgba(253, 224, 71, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(253, 224, 71, 0); }
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #c084fc, #9333ea);
-  color: #fff !important;
+  background: linear-gradient(135deg, #fde047, #eab308);
+  color: #111 !important;
   width: 100%;
   border: none;
   font-weight: bold;
@@ -1046,12 +1052,12 @@ body {
   padding: 18px 0;
   border-radius: 12px;
   margin-top: 15px;
-  box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.4);
   transition: all 0.3s ease;
 }
 .submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(147, 51, 234, 0.6);
+  box-shadow: 0 10px 25px rgba(234, 179, 8, 0.6);
 }
 
 /* CSS for back-facing Aria walk cycle animation on Intro Page */
