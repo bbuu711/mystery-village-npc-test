@@ -485,7 +485,13 @@ if (storySystemBox) {
       } else {
         sound.playClick();
         screenStory.classList.remove('active');
-        screenForm.classList.add('active');
+        const hasForm = document.getElementById('screen-form');
+        if (hasForm) {
+          screenForm.classList.add('active');
+        } else {
+          // Standard Version: Go straight to the start door screen
+          screenIntro.classList.add('active');
+        }
       }
     }
   });
