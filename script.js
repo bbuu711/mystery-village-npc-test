@@ -155,43 +155,77 @@ function initParticles() {
 // --- Quiz Data ---
 const quizData = [
   {
-    systemMessage: "[모닥불] \"반가워! 미스터리 마을로 떠나기 전에 네 성향을 동기화할게.\n평소에 어떤 스타일로 게임하는 걸 가장 좋아해?\"",
-    question: "Q1. 플레이 스타일 선택",
+    type: 'single',
+    systemMessage: "[모닥불] \"당신이 게임 속 NPC가 된다면 어떤 캐릭터일까요?\\n첫 번째 질문부터 차근차근 시작해보자.\"",
+    title: "STEP 1. NPC 성격 설정",
+    question: "Q. NPC마다 성격에 따라 대사와 행동이 달라집니다.\\n가장 나와 가까운 것을 선택해주세요.",
     options: [
-      { text: "🎨 1 : 고장 난 주민들의 속마음 이야기를 듣고\n치료하는 스토리 중심 플레이", scores: { emotional: 3, social: 1 }, item: "🎨" },
-      { text: "⚙️ 2 : 마을이 왜 고장 났는지 원인을 분석하고\n버그를 고치는 공략 중심 플레이", scores: { rational: 3, orderly: 1 }, item: "⚙️" },
-      { text: "🏡 3 : 내 방을 아기자기한 가구로 예쁘게 꾸미고\n친구들을 초대하는 힐링 중심 플레이", scores: { social: 3, emotional: 1 }, item: "🏡" },
-      { text: "🏆 4 : 규칙대로 정해진 일일 퀘스트와\n도전 과제를 완벽하게 깨는 100점 플레이", scores: { orderly: 3, rational: 1 }, item: "🏆" }
+      { text: "처음 보는 사람에게도 먼저 말을 건다.", scores: { social: 3, emotional: 1 } },
+      { text: "친해질 때까지 상대를 지켜보는 편이다.", scores: { rational: 3, orderly: 1 } },
+      { text: "새로운 일이 생기면 일단 도전해본다.", scores: { emotional: 3, social: 1 } },
+      { text: "계획보다 즉흥적으로 움직인다.", scores: { emotional: 2, rational: 2 } }
     ]
   },
   {
-    systemMessage: "[모닥불] \"마을에 도착하니 네 머리 위에 '스케줄 슬롯'이 켜졌어.\n네가 매일 무한 반복하고 있는 '진짜 네 현실 일정'은 어때?\"",
-    question: "Q2. 나의 일상 데이터 연동",
+    type: 'single',
+    systemMessage: "[모닥불] \"음, 그렇구나.\\n그럼 평소엔 주로 어디서 시간을 보내?\"",
+    title: "STEP 2. NPC의 일상 (1/2)",
+    question: "가장 많은 시간을 보내는 곳",
     options: [
-      { text: "📚 1 : 동아리, 팀플, 스터디, 자치 모임으로\n하루가 꽉 찬 바쁜 루틴", scores: { social: 3, emotional: 1 }, item: "🏡" },
-      { text: "💼 2 : 생활비(골드)를 벌기 위해\n고정 요일마다 꼭 가야 하는 알바 루틴", scores: { orderly: 3, rational: 1 }, item: "🏆" },
-      { text: "✈️ 3 : 언제든 바캉스나 번개 모임을 떠날 수 있게\n비워둔 즉흥 루틴", scores: { emotional: 3, social: 1 }, item: "🎨" },
-      { text: "☕ 4 : 나를 묶어두는 일정이 단 하나도 없어서\n언제든 풀 접속 가능한 루틴", scores: { rational: 3, social: 1 }, item: "☕" }
+      { text: "학교", scores: { social: 2, orderly: 2 } },
+      { text: "회사", scores: { rational: 3, orderly: 1 } },
+      { text: "집", scores: { emotional: 3, orderly: 1 } },
+      { text: "기타", scores: { social: 1, emotional: 1 } }
     ]
   },
   {
-    systemMessage: "[모닥불] \"거울을 들여다보니 정보창 이면에 숨겨진 속성이 빛나기 시작해.\n네 가방 속 깊은 곳에 남겨진 '나만의 고유한 특징'은 뭐야?\"",
-    question: "Q3. 내면의 인벤토리 스캔",
+    type: 'single',
+    systemMessage: "[모닥불] \"바쁜 일상이네.\\n그럼 쉴 때는 주로 뭐 해?\"",
+    title: "STEP 2. NPC의 일상 (2/2)",
+    question: "쉬는 날에는 주로 어떻게 시간을 보내나요?",
     options: [
-      { text: "✨ 1 : 내 개성과 독특한 취향을 표현해 둔\n'나만의 비밀 마크(문양스킨)'", scores: { emotional: 3, social: 1 } },
-      { text: "🤝 2 : 성별 상관없이 마음이 가장 잘 통하는\n소중한 친구와 '평생 단짝 서약' 맺기", scores: { social: 3, emotional: 1 } },
-      { text: "🌱 3 : 멘탈 관리를 위해 명상이나 일기 쓰기 등\n'나만의 마음 챙김 루틴'을 꼭 챙기기", scores: { orderly: 3, rational: 1 } },
-      { text: "🔮 4 : 치열한 현실 과제들에 치여 마음의 에너지가\n보라색으로 깜빡깜빡 방전된 상태", scores: { rational: 3, emotional: 1 }, item: "🔮" }
+      { text: "친구를 만난다.", scores: { social: 4 } },
+      { text: "집에서 쉰다(넷플릭스 등).", scores: { emotional: 3, orderly: 1 } },
+      { text: "새로운 곳을 간다.", scores: { emotional: 2, social: 2 } },
+      { text: "취미를 즐긴다.", scores: { rational: 2, orderly: 2 } }
     ]
   },
   {
-    systemMessage: "[모닥불] \"축하해! 주민들의 마음을 다 고쳐줬구나.\n마침내 마음의 '틈' 너머에 숨겨져 있던 진짜 소원이 나타났어.\n네가 지금 가장 풀고 싶은 소원은?\"",
-    question: "Q4. 틈새 너머의 진짜 소원",
+    type: 'single',
+    systemMessage: "[모닥불] \"이제 너라는 NPC의 '메인 퀘스트'를 알아볼 차례야.\"",
+    title: "STEP 3. 메인 키워드",
+    question: "현재 당신 NPC에게 해당하는\\n메인 키워드는 무엇인가요?",
     options: [
-      { text: "💌 1 : 캠퍼스에서 마음이 딱 맞는 파트너를 만나\n이쁜 연애를 하는 것", scores: { social: 3, emotional: 1 } },
-      { text: "🎯 2 : 내 전공 포트폴리오를 완성해서\n원하는 꿈의 직장에 무사히 합격하는 것", scores: { rational: 3, orderly: 1 }, item: "⚙️" },
-      { text: "🕊️ 3 : 주변 사람들과 오해나 싸움 없이\n상처받지 않고 사이좋게 지내는 것", scores: { orderly: 3, social: 1 } },
-      { text: "🛌 4 : 피로 게이지가 꽉 차서 지친 나에게,\n다 끄고 침대 속에서 푹 쉴 수 있는 휴식을 주는 것", scores: { emotional: 3, rational: 1 }, item: "🛌" }
+      { text: "진로/취업", scores: { rational: 3, orderly: 2 }, item: "⚙️" },
+      { text: "인간관계", scores: { social: 4, emotional: 1 }, item: "💌" },
+      { text: "연애", scores: { emotional: 4, social: 1 }, item: "🎨" },
+      { text: "경제", scores: { rational: 4, orderly: 1 }, item: "🏆" },
+      { text: "기타", scores: { emotional: 1, rational: 1 }, item: "🛌" }
+    ]
+  },
+  {
+    type: 'multiple',
+    systemMessage: "[모닥불] \"아하, 그렇구나.\\n그럼 이제 네가 숨기고 있는 히든 설정을 엿볼까? (여러 개 골라도 돼)\"",
+    title: "STEP 4. 💬 NPC 회복 시 공개되는 설정",
+    question: "플레이어의 틈을 고쳐주면 공개되는 당신 NPC의 히든 설정입니다.\\n가장 어울리는 설정을 선택해주세요. (중복 선택 가능)",
+    options: [
+      { text: "🌿 마음을 다스리는 나만의 방법이 있다.", scores: { orderly: 3, rational: 1 } },
+      { text: "🎨 남들과 다른 취향이나 스타일이 있다.", scores: { emotional: 3, social: 1 } },
+      { text: "🧭 소중하게 지키는 가치가 있다.", scores: { rational: 2, orderly: 2 } },
+      { text: "🔒 아직 누구에게도 말하지 못한 비밀이 있다.", scores: { emotional: 4 } }
+    ]
+  },
+  {
+    type: 'single',
+    systemMessage: "[모닥불] \"마지막이야.\\n아무도 모르는 네 마음속 '틈'을 들여다볼게.\"",
+    title: "STEP 5. 마음속 ‘틈’",
+    question: "모든 NPC에게는 플레이어가 쉽게 볼 수 없는 **‘틈’**이 존재합니다.\\n가장 공감되는 문장을 선택해주세요.",
+    options: [
+      { text: "항상 괜찮은 척하지만 혼자 생각이 많다.", scores: { emotional: 3, rational: 2 } },
+      { text: "쉬고 싶지만 계속 달려야 할 것 같다.", scores: { orderly: 4, rational: 1 } },
+      { text: "남들의 기대에 맞추려고 노력하는 편이다.", scores: { social: 4, orderly: 1 } },
+      { text: "진짜 내 모습을 아직 잘 모르겠다.", scores: { emotional: 4, social: 1 } },
+      { text: "사람들과 함께 있어도 가끔 외롭다.", scores: { social: 3, emotional: 2 } }
     ]
   }
 ];
@@ -571,10 +605,11 @@ function startQuiz() {
 
 // Load Question step
 let currentStepState = 'typing'; // typing -> waiting_click -> question
+let selectedOptions = []; // Array to store multiple selections
 
 function loadQuestion(index) {
   currentQuestionIndex = index;
-  selectedOptionIndex = null;
+  selectedOptions = [];
   btnNext.disabled = true;
   btnNext.className = 'btn btn-disabled';
   
@@ -592,57 +627,58 @@ function loadQuestion(index) {
     gameCharacter.style.left = `${percentage}%`;
     setTimeout(() => {
       gameCharacter.classList.remove('walking');
-    }, 500); // Stop walking after move
+    }, 500);
   }
 
-  // Hide Quiz Card (for choices)
   quizCard.style.display = 'none';
   dialogNextIndicator.style.display = 'none';
-  
   currentStepState = 'typing';
   
-  // Start typing system message
   typeText(quizSystemText, qData.systemMessage, () => {
     currentStepState = 'waiting_click';
     dialogNextIndicator.style.display = 'block';
   });
 }
 
-// Click on Quiz System Box to transition from system notice to actual question options
 quizSystemBox.addEventListener('click', () => {
   const qData = quizData[currentQuestionIndex];
   
   if (currentStepState === 'typing') {
-    // Fast-forward typing
     skipTyping(quizSystemText, qData.systemMessage, () => {
       currentStepState = 'waiting_click';
       dialogNextIndicator.style.display = 'block';
     });
   } else if (currentStepState === 'waiting_click') {
-    // Show question and options
     sound.playClick();
     currentStepState = 'question';
     dialogNextIndicator.style.display = 'none';
     
-    // Populate Question details
-    questionTitle.textContent = qData.question;
+    // Convert bold to span if any
+    let formattedQ = qData.question.replace(/\*\*(.*?)\*\*/g, '<span style="color:#ff6b6b;font-weight:bold;">$1</span>');
+    
+    questionTitle.innerHTML = `<span style="color:#aaa; font-size:14px;">${qData.title}</span><br><br>${formattedQ}`;
     optionsList.innerHTML = '';
     
     qData.options.forEach((opt, idx) => {
       const optionEl = document.createElement('div');
       optionEl.className = 'option-item';
-      optionEl.innerHTML = `
-        <div class="option-radio">
-          <div class="option-radio-dot"></div>
-        </div>
-        <div class="option-text">${opt.text}</div>
-      `;
       
-      optionEl.addEventListener('click', () => selectOption(idx));
+      if (qData.type === 'multiple') {
+        optionEl.innerHTML = `
+          <div class="option-checkbox"></div>
+          <div class="option-text">${opt.text}</div>
+        `;
+      } else {
+        optionEl.innerHTML = `
+          <div class="option-radio"><div class="option-radio-dot"></div></div>
+          <div class="option-text">${opt.text}</div>
+        `;
+      }
+      
+      optionEl.addEventListener('click', () => selectOption(idx, qData.type));
       optionsList.appendChild(optionEl);
     });
     
-    // Smoothly show quiz options card
     quizCard.style.display = 'block';
   }
 });
@@ -661,67 +697,77 @@ function renderEquippedItems() {
   });
 }
 
-function renderEquippedItems() {
-  const container = document.getElementById('equipped-items');
-  if (!container) return;
-  container.innerHTML = '';
-  equippedItems.forEach((item, idx) => {
-    if (item) {
-      const el = document.createElement('div');
-      el.className = 'eq-item eq-item-' + idx;
-      el.textContent = item;
-      container.appendChild(el);
-    }
-  });
-}
-
-function selectOption(index) {
+function selectOption(index, type) {
   sound.playClick();
-  selectedOptionIndex = index;
-  
-  // Update styling
   const items = optionsList.querySelectorAll('.option-item');
-  items.forEach((item, idx) => {
-    if (idx === index) {
-      item.classList.add('selected');
-    } else {
-      item.classList.remove('selected');
-    }
-  });
   
-  // Enable Confirm Button
-  btnNext.disabled = false;
-  btnNext.className = 'btn btn-primary';
+  if (type === 'multiple') {
+    const arrIdx = selectedOptions.indexOf(index);
+    if (arrIdx > -1) {
+      selectedOptions.splice(arrIdx, 1);
+      items[index].classList.remove('selected');
+    } else {
+      selectedOptions.push(index);
+      items[index].classList.add('selected');
+    }
+    
+    if (selectedOptions.length > 0) {
+      btnNext.disabled = false;
+      btnNext.className = 'btn btn-primary';
+    } else {
+      btnNext.disabled = true;
+      btnNext.className = 'btn btn-disabled';
+    }
+  } else {
+    selectedOptions = [index];
+    items.forEach((item, idx) => {
+      if (idx === index) item.classList.add('selected');
+      else item.classList.remove('selected');
+    });
+    
+    btnNext.disabled = false;
+    btnNext.className = 'btn btn-primary';
+  }
 }
 
 btnNext.addEventListener('click', () => {
-  if (selectedOptionIndex === null) return;
+  if (selectedOptions.length === 0) return;
   
   sound.playConfirm();
+  const qData = quizData[currentQuestionIndex];
   
   // Add scores
-  const selectedOption = quizData[currentQuestionIndex].options[selectedOptionIndex];
-  for (const [key, value] of Object.entries(selectedOption.scores)) {
-    userScores[key] += value;
-  }
+  selectedOptions.forEach(optIdx => {
+    const selectedOption = qData.options[optIdx];
+    if (selectedOption.item) {
+       equippedItems.push(selectedOption.item);
+       renderEquippedItems();
+    }
+    for (const [key, value] of Object.entries(selectedOption.scores)) {
+      userScores[key] += value;
+    }
+  });
   
-  // Go to next question or show results
   if (currentQuestionIndex + 1 < quizData.length) {
     loadQuestion(currentQuestionIndex + 1);
   } else {
-    // Final progress bar fills up
     progressBar.style.width = '100%';
-    
     if (gameCharacter) {
       gameCharacter.classList.add('walking');
       gameCharacter.style.left = '100%';
       setTimeout(() => {
         gameCharacter.classList.remove('walking');
-        gameCharacter.style.display = 'none'; // hide character before result screen
+        gameCharacter.style.display = 'none';
       }, 500);
     }
     
-    showResults();
+    // Add Celebration overlay temporarily
+    quizSystemText.textContent = "[모닥불] \"수고했어! NPC 생성 완료!\"";
+    quizSystemBox.style.display = 'block';
+    
+    setTimeout(() => {
+        showResults();
+    }, 1500);
   }
 });
 

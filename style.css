@@ -437,6 +437,40 @@ body {
   border-color: var(--theme-color);
 }
 
+
+.option-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px; /* Square for checkbox */
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.option-item:hover .option-checkbox {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.option-item.selected .option-checkbox {
+  border-color: var(--theme-color);
+  background-color: var(--theme-color);
+}
+
+/* Add a checkmark icon for selected checkbox */
+.option-item.selected .option-checkbox::after {
+  content: '';
+  width: 5px;
+  height: 10px;
+  border: solid #111;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+}
+
 .option-radio-dot {
   width: 10px;
   height: 10px;
