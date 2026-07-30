@@ -17,7 +17,7 @@ body {
 }
 
 :root {
-  --theme-color: #fde047;
+  --theme-color: #c084fc;
   --progress-ratio: 0;
 }
 
@@ -29,18 +29,33 @@ body {
   height: 100vh;
   background-size: cover;
   background-position: center;
-  transition: opacity 1s ease;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.bg-layer::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle at 45% 45%, rgba(168, 85, 247, 0.18) 0%, rgba(139, 92, 246, 0.05) 30%, rgba(0, 0, 0, 0) 65%);
+  animation: rotateNebula 90s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotateNebula {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .bg-day {
-  background-image: url('bg_day.jpg');
-  opacity: calc((1 - var(--progress-ratio)) * 0.8);
+  background: radial-gradient(circle at 30% 30%, #1e133a 0%, #0d081f 50%, #06040f 100%);
+  opacity: calc((1 - var(--progress-ratio)) * 1);
   z-index: -2;
 }
 
 .bg-night {
-  background-image: url('bg_night.jpg');
-  opacity: calc(var(--progress-ratio) * 0.8);
+  background: radial-gradient(circle at 70% 70%, #110029 0%, #070014 60%, #020006 100%);
+  opacity: calc(var(--progress-ratio) * 1);
   z-index: -1;
 }
 
@@ -957,14 +972,27 @@ body {
   background-size: cover;
   background-position: center;
   position: relative;
+  transition: filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Base overlay: completely transparent and clear initially */
 #screen-intro::before {
   content: '';
   position: absolute;
   top:0; left:0; right:0; bottom:0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
   z-index: 0;
+  transition: background 1.2s cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+/* Darken & Blur state when button clicked */
+#screen-intro.darkened::before {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 #screen-intro .intro-card {
@@ -976,20 +1004,24 @@ body {
   justify-content: flex-end;
   height: 100%;
   padding-bottom: 50px;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .door-btn {
-  background: rgba(29, 9, 54, 0.8);
-  border: 2px solid #9b59b6;
+  background: rgba(29, 9, 54, 0.85);
+  border: 2px solid #a855f7;
   border-radius: 8px;
-  color: #e0d6eb;
-  font-family: 'NeoDunggeunmo', sans-serif;
+  color: #f3e8ff;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 18px;
-  padding: 15px 30px;
+  padding: 16px 32px;
   cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
   animation: pulseBtn 2s infinite;
+  z-index: 2;
 }
 
 .door-btn:hover {
@@ -1002,4 +1034,22 @@ body {
   0% { box-shadow: 0 0 0 0 rgba(155, 89, 182, 0.7); }
   70% { box-shadow: 0 0 0 15px rgba(155, 89, 182, 0); }
   100% { box-shadow: 0 0 0 0 rgba(155, 89, 182, 0); }
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #c084fc, #9333ea);
+  color: #fff !important;
+  width: 100%;
+  border: none;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 18px 0;
+  border-radius: 12px;
+  margin-top: 15px;
+  box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);
+  transition: all 0.3s ease;
+}
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(147, 51, 234, 0.6);
 }

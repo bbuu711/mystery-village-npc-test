@@ -390,16 +390,32 @@ let introTypingDone = false;
 function playIntroSequence() {
   introTypingDone = false;
   
-  // Show intro text box and type immediately
-  btnStart.style.display = 'none'; 
-  introSystemBox.style.display = 'block';
+  // Add class to darken background
+  const introScreen = document.getElementById('screen-intro');
+  introScreen.classList.add('darkened');
   
-  // Ensure game character is hidden in intro
-  if (gameCharacter) gameCharacter.style.display = 'none';
-
-  typeText(introSystemText, introText, () => {
-    introTypingDone = true;
-  });
+  // Hide the start button smoothly
+  btnStart.style.opacity = '0';
+  btnStart.style.transform = 'translateY(15px) scale(0.95)';
+  btnStart.style.pointerEvents = 'none';
+  
+  // Wait for the transition to finish before showing notice box
+  setTimeout(() => {
+    btnStart.style.display = 'none';
+    introSystemBox.style.display = 'block';
+    introSystemBox.style.opacity = '0';
+    introSystemBox.style.transform = 'translateY(10px)';
+    
+    // Trigger transition
+    void introSystemBox.offsetWidth;
+    introSystemBox.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    introSystemBox.style.opacity = '1';
+    introSystemBox.style.transform = 'translateY(0)';
+    
+    typeText(introSystemText, introText, () => {
+      introTypingDone = true;
+    });
+  }, 800);
 }
 
 // --------------------------------------------------
