@@ -156,9 +156,9 @@ function initParticles() {
 const quizData = [
   {
     type: 'single',
-    systemMessage: "[모닥불] \"당신이 게임 속 NPC가 된다면 어떤 캐릭터일까요?\\n첫 번째 질문부터 차근차근 시작해보자.\"",
+    systemMessage: "[모닥불] \"당신이 게임 속 NPC가 된다면 어떤 캐릭터일까요?\n첫 번째 질문부터 차근차근 시작해보자.\"",
     title: "STEP 1. NPC 성격 설정",
-    question: "Q. NPC마다 성격에 따라 대사와 행동이 달라집니다.\\n가장 나와 가까운 것을 선택해주세요.",
+    question: "Q. NPC마다 성격에 따라 대사와 행동이 달라집니다.\n가장 나와 가까운 것을 선택해주세요.",
     options: [
       { text: "처음 보는 사람에게도 먼저 말을 건다.", scores: { social: 3, emotional: 1 } },
       { text: "친해질 때까지 상대를 지켜보는 편이다.", scores: { rational: 3, orderly: 1 } },
@@ -168,7 +168,7 @@ const quizData = [
   },
   {
     type: 'single',
-    systemMessage: "[모닥불] \"음, 그렇구나.\\n그럼 평소엔 주로 어디서 시간을 보내?\"",
+    systemMessage: "[모닥불] \"음, 그렇구나.\n그럼 평소엔 주로 어디서 시간을 보내?\"",
     title: "STEP 2. NPC의 일상 (1/2)",
     question: "가장 많은 시간을 보내는 곳",
     options: [
@@ -180,7 +180,7 @@ const quizData = [
   },
   {
     type: 'single',
-    systemMessage: "[모닥불] \"바쁜 일상이네.\\n그럼 쉴 때는 주로 뭐 해?\"",
+    systemMessage: "[모닥불] \"바쁜 일상이네.\n그럼 쉴 때는 주로 뭐 해?\"",
     title: "STEP 2. NPC의 일상 (2/2)",
     question: "쉬는 날에는 주로 어떻게 시간을 보내나요?",
     options: [
@@ -194,7 +194,7 @@ const quizData = [
     type: 'single',
     systemMessage: "[모닥불] \"이제 너라는 NPC의 '메인 퀘스트'를 알아볼 차례야.\"",
     title: "STEP 3. 메인 키워드",
-    question: "현재 당신 NPC에게 해당하는\\n메인 키워드는 무엇인가요?",
+    question: "현재 당신 NPC에게 해당하는\n메인 키워드는 무엇인가요?",
     options: [
       { text: "진로/취업", scores: { rational: 3, orderly: 2 }, item: "⚙️" },
       { text: "인간관계", scores: { social: 4, emotional: 1 }, item: "💌" },
@@ -205,9 +205,9 @@ const quizData = [
   },
   {
     type: 'multiple',
-    systemMessage: "[모닥불] \"아하, 그렇구나.\\n그럼 이제 네가 숨기고 있는 히든 설정을 엿볼까? (여러 개 골라도 돼)\"",
+    systemMessage: "[모닥불] \"아하, 그렇구나.\n그럼 이제 네가 숨기고 있는 히든 설정을 엿볼까? (여러 개 골라도 돼)\"",
     title: "STEP 4. 💬 NPC 회복 시 공개되는 설정",
-    question: "플레이어의 틈을 고쳐주면 공개되는 당신 NPC의 히든 설정입니다.\\n가장 어울리는 설정을 선택해주세요. (중복 선택 가능)",
+    question: "플레이어의 틈을 고쳐주면 공개되는 당신 NPC의 히든 설정입니다.\n가장 어울리는 설정을 선택해주세요. (중복 선택 가능)",
     options: [
       { text: "🌿 마음을 다스리는 나만의 방법이 있다.", scores: { orderly: 3, rational: 1 } },
       { text: "🎨 남들과 다른 취향이나 스타일이 있다.", scores: { emotional: 3, social: 1 } },
@@ -217,9 +217,9 @@ const quizData = [
   },
   {
     type: 'single',
-    systemMessage: "[모닥불] \"마지막이야.\\n아무도 모르는 네 마음속 '틈'을 들여다볼게.\"",
+    systemMessage: "[모닥불] \"마지막이야.\n아무도 모르는 네 마음속 '틈'을 들여다볼게.\"",
     title: "STEP 5. 마음속 ‘틈’",
-    question: "모든 NPC에게는 플레이어가 쉽게 볼 수 없는 **‘틈’**이 존재합니다.\\n가장 공감되는 문장을 선택해주세요.",
+    question: "모든 NPC에게는 플레이어가 쉽게 볼 수 없는 **‘틈’**이 존재합니다.\n가장 공감되는 문장을 선택해주세요.",
     options: [
       { text: "항상 괜찮은 척하지만 혼자 생각이 많다.", scores: { emotional: 3, rational: 2 } },
       { text: "쉬고 싶지만 계속 달려야 할 것 같다.", scores: { orderly: 4, rational: 1 } },
@@ -390,18 +390,43 @@ let introTypingDone = false;
 function playIntroSequence() {
   introTypingDone = false;
   
-  // Add class to darken background
-  const introScreen = document.getElementById('screen-intro');
-  introScreen.classList.add('darkened');
-  
   // Hide the start button smoothly
   btnStart.style.opacity = '0';
   btnStart.style.transform = 'translateY(15px) scale(0.95)';
   btnStart.style.pointerEvents = 'none';
   
-  // Wait for the transition to finish before showing notice box
+  // Move and setup the walking character inside the intro screen
+  const introScreen = document.getElementById('screen-intro');
+  introScreen.appendChild(gameCharacter);
+  
+  // Set initial position at the bottom-center of the screen
+  gameCharacter.style.display = 'block';
+  gameCharacter.style.left = '50%';
+  gameCharacter.style.bottom = '20px';
+  gameCharacter.style.transform = 'translateX(-50%) scale(1.4)';
+  gameCharacter.style.backgroundPosition = '0 0'; // Back facing sprite
+  gameCharacter.style.opacity = '1';
+  gameCharacter.style.transition = 'none';
+  gameCharacter.classList.add('walking');
+  
+  // Force a reflow
+  void gameCharacter.offsetWidth;
+  
+  // Animate the character walking UP (towards the door), scaling down (depth), and fading away
+  gameCharacter.style.transition = 'bottom 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 1.8s ease-in 0.4s';
+  gameCharacter.style.bottom = '220px'; // Path leads to the door
+  gameCharacter.style.transform = 'translateX(-50%) scale(0.6)'; // Simulates distance
+  gameCharacter.style.opacity = '0'; // Disappears into the portal
+  
+  // Concurrently darken and blur background
+  introScreen.classList.add('darkened');
+  
+  // Wait for the walking animation to finish before showing the notice box
   setTimeout(() => {
     btnStart.style.display = 'none';
+    gameCharacter.classList.remove('walking');
+    gameCharacter.style.display = 'none';
+    
     introSystemBox.style.display = 'block';
     introSystemBox.style.opacity = '0';
     introSystemBox.style.transform = 'translateY(10px)';
@@ -415,7 +440,7 @@ function playIntroSequence() {
     typeText(introSystemText, introText, () => {
       introTypingDone = true;
     });
-  }, 800);
+  }, 2200);
 }
 
 // --------------------------------------------------

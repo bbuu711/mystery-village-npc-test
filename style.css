@@ -205,7 +205,7 @@ body {
 
 .game-subtitle {
   font-size: 0.9rem;
-  color: var(--theme-color);
+  color: #fde047; /* Yellow question text */
   letter-spacing: 2px;
   margin-bottom: 40px;
   font-weight: 500;
@@ -246,7 +246,7 @@ body {
   white-space: pre-line;
   font-size: 1.15rem;
   line-height: 1.6;
-  color: #f5f0eb;
+  color: #fde047; /* Yellow system text */
   min-height: 50px;
 }
 
@@ -375,10 +375,10 @@ body {
   white-space: pre-line;
   font-size: 1.35rem;
   line-height: 1.5;
-  color: var(--theme-color);
+  color: #fde047; /* Yellow question text */
   margin-bottom: 25px;
   font-weight: 500;
-  border-left: 3.5px solid var(--theme-color);
+  border-left: 3.5px solid #fde047;
   padding-left: 12px;
   transition: color 1s ease, border-color 1s ease;
 }
