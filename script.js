@@ -162,8 +162,8 @@ const quizData = [
     options: [
       { text: "처음 보는 사람에게도 먼저 말을 건다.", scores: { social: 3, emotional: 1 } },
       { text: "친해질 때까지 상대를 지켜보는 편이다.", scores: { rational: 3, orderly: 1 } },
-      { text: "새로운 일이 생기면 일단 도전해본다.", scores: { emotional: 3, social: 1 } },
-      { text: "계획보다 즉흥적으로 움직인다.", scores: { emotional: 2, rational: 2 } }
+      { text: "새로운 일이 생기면 일단 도전해본다.", scores: { social: 3, emotional: 1 } },
+      { text: "계획보다 즉흥적으로 움직인다.", scores: { emotional: 4 } }
     ]
   },
   {
@@ -173,8 +173,8 @@ const quizData = [
     question: "가장 많은 시간을 보내는 곳",
     options: [
       { text: "학교", scores: { social: 2, orderly: 2 } },
-      { text: "회사", scores: { rational: 3, orderly: 1 } },
-      { text: "집", scores: { emotional: 3, orderly: 1 } },
+      { text: "회사", scores: { rational: 2, orderly: 2 } },
+      { text: "집", scores: { emotional: 2, orderly: 1 } },
       { text: "기타", scores: { social: 1, emotional: 1 } }
     ]
   },
@@ -196,11 +196,11 @@ const quizData = [
     title: "STEP 3. 메인 키워드",
     question: "현재 당신 NPC에게 해당하는\n메인 키워드는 무엇인가요?",
     options: [
-      { text: "진로/취업", scores: { rational: 3, orderly: 2 }, item: "⚙️" },
-      { text: "인간관계", scores: { social: 4, emotional: 1 }, item: "💌" },
-      { text: "연애", scores: { emotional: 4, social: 1 }, item: "🎨" },
-      { text: "경제", scores: { rational: 4, orderly: 1 }, item: "🏆" },
-      { text: "기타", scores: { emotional: 1, rational: 1 }, item: "🛌" }
+      { text: "진로/취업", scores: { rational: 3, orderly: 1 }, item: "🗒️" },
+      { text: "인간관계", scores: { social: 3, emotional: 1 }, item: "💌" },
+      { text: "연애", scores: { emotional: 3, social: 1 }, item: "❤️" },
+      { text: "경제", scores: { rational: 1, orderly: 3 }, item: "💰" },
+      { text: "기타", scores: { emotional: 1, rational: 1 }, item: "⚙️" }
     ]
   },
   {
@@ -221,11 +221,11 @@ const quizData = [
     title: "STEP 5. 마음속 ‘틈’",
     question: "모든 NPC에게는 플레이어가 쉽게 볼 수 없는 **‘틈’**이 존재합니다.\n가장 공감되는 문장을 선택해주세요.",
     options: [
-      { text: "항상 괜찮은 척하지만 혼자 생각이 많다.", scores: { emotional: 3, rational: 2 } },
-      { text: "쉬고 싶지만 계속 달려야 할 것 같다.", scores: { orderly: 4, rational: 1 } },
-      { text: "남들의 기대에 맞추려고 노력하는 편이다.", scores: { social: 4, orderly: 1 } },
-      { text: "진짜 내 모습을 아직 잘 모르겠다.", scores: { emotional: 4, social: 1 } },
-      { text: "사람들과 함께 있어도 가끔 외롭다.", scores: { social: 3, emotional: 2 } }
+      { text: "항상 괜찮은 척하지만 혼자 생각이 많다.", scores: { emotional: 2, rational: 2 } },
+      { text: "쉬고 싶지만 계속 달려야 할 것 같다.", scores: { orderly: 3, rational: 1 } },
+      { text: "남들의 기대에 맞추려고 노력하는 편이다.", scores: { social: 3, emotional: 1 } },
+      { text: "진짜 내 모습을 아직 잘 모르겠다.", scores: { orderly: 2, social: 2 } },
+      { text: "사람들과 함께 있어도 가끔 외롭다.", scores: { social: 2, emotional: 2 } }
     ]
   }
 ];
