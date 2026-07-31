@@ -794,10 +794,47 @@ function showResults() {
   animateStatBar(statSocial, valSocial, pctSocial);
   animateStatBar(statOrderly, valOrderly, pctOrderly);
   
+  // Render character preview (Start with orderly - '묵묵하게 곁을 지키는 기사')
+  const previewContainer = document.getElementById('result-character-preview');
+  const btnDetail = document.getElementById('btn-detail');
+  
+  if (dominantType === 'orderly') {
+    const pixelImg = userGender === 'male' ? 'assets/knight_male_pixel.png' : 'assets/knight_female_pixel.png';
+    previewContainer.innerHTML = `<img src="${pixelImg}" style="height: 100px; width: auto; image-rendering: pixelated; margin: 0 auto; display: block;">`;
+    btnDetail.style.display = 'block';
+  } else {
+    // Fallback badge icon for other types
+    previewContainer.innerHTML = `<div style="font-size: 3rem; text-align: center; line-height: 60px;">${details.badge}</div>`;
+    btnDetail.style.display = 'none';
+  }
+  
   setTimeout(() => {
     screenResult.classList.add('active');
   }, 500);
 }
+
+// Detail button click opens the illustration modal
+const btnDetail = document.getElementById('btn-detail');
+if (btnDetail) {
+  btnDetail.addEventListener('click', () => {
+    sound.playClick();
+    const modal = document.getElementById('illust-modal');
+    const img = document.getElementById('illust-img');
+    img.src = userGender === 'male' ? 'assets/knight_male_illust.jpg' : 'assets/knight_female_illust.jpg';
+    modal.classList.add('active');
+  });
+}
+
+// Close illustration modal click listeners - queried dynamically to prevent null reference on load
+document.addEventListener('click', (e) => {
+  const modal = document.getElementById('illust-modal');
+  if (!modal) return;
+  
+  // Close when clicking close span or the dark background overlay
+  if (e.target.classList.contains('close-modal') || e.target.id === 'illust-modal') {
+    modal.classList.remove('active');
+  }
+});
 
 function animateStatBar(barEl, valEl, targetValue) {
   barEl.style.width = '0%';
