@@ -892,7 +892,7 @@ btnSubmit.addEventListener('click', async () => {
 
     const payload = {
       name: betaName ? betaName.value.trim() : "Unknown",
-      age_desc: betaAge ? betaAge.value.trim() : "Unknown",
+      age: betaAge ? betaAge.value.trim() : "Unknown",
       job: betaJob ? betaJob.value.trim() : "Unknown",
       contact: betaContact ? betaContact.value.trim() : "Unknown",
       npc_type: npcType,
@@ -930,11 +930,7 @@ btnSubmit.addEventListener('click', async () => {
   }
 });
 
-// Submit button
-btnSubmit.addEventListener('click', () => {
-  sound.playClick();
-  alert("베타테스트 결과가 성공적으로 제출되었습니다!\n소중한 의견 감사드립니다.");
-});
+
 
 btnStart.addEventListener('click', () => {
   sound.playConfirm();
