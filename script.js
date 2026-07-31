@@ -799,8 +799,8 @@ function showResults() {
   const btnDetail = document.getElementById('btn-detail');
   
   if (dominantType === 'orderly') {
-    const portraitImg = userGender === 'male' ? 'assets/knight_male_portrait.jpg' : 'assets/knight_female_portrait.jpg';
-    previewContainer.innerHTML = `<img src="${portraitImg}" style="width: 100%; height: 100%; object-fit: cover; display: block;">`;
+    const portraitImg = userGender === 'male' ? 'assets/knight_male_portrait_trans.png' : 'assets/knight_female_portrait_trans.png';
+    previewContainer.innerHTML = `<img src="${portraitImg}">`;
     btnDetail.style.display = 'block';
   } else {
     // Fallback badge icon for other types
