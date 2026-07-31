@@ -807,6 +807,10 @@ function showResults() {
     const portraitImg = userGender === 'male' ? 'assets/activity_male_portrait_trans.png' : 'assets/activity_female_portrait_trans.png';
     previewContainer.innerHTML = `<img src="${portraitImg}">`;
     btnDetail.style.display = 'block';
+  } else if (dominantType === 'rational') {
+    const portraitImg = userGender === 'male' ? 'assets/scholar_male_portrait_trans.png' : 'assets/scholar_female_portrait_trans.png';
+    previewContainer.innerHTML = `<img src="${portraitImg}">`;
+    btnDetail.style.display = 'block';
   } else {
     // Fallback badge icon for other types
     previewContainer.innerHTML = `<div style="font-size: 3.5rem; text-align: center; line-height: 130px;">${details.badge}</div>`;
@@ -829,6 +833,8 @@ if (btnDetail) {
       img.src = userGender === 'male' ? 'assets/knight_male_illust_v2.jpg' : 'assets/knight_female_illust_v2.jpg';
     } else if (dominantType === 'social') {
       img.src = userGender === 'male' ? 'assets/activity_male_illust.jpg' : 'assets/activity_female_illust.jpg';
+    } else if (dominantType === 'rational') {
+      img.src = userGender === 'male' ? 'assets/scholar_male_illust.jpg' : 'assets/scholar_female_illust.jpg';
     }
     modal.classList.add('active');
   });
