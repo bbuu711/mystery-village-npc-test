@@ -819,7 +819,7 @@ btnSubmit.addEventListener('click', async () => {
       items: itemsStr
     };
     // Route dynamically: beta_testers if form exists, standard_results if it is the standard version
-    const tableName = document.getElementById('screen-form') ? 'beta_testers' : 'standard_results';
+    const tableName = document.getElementById('screen-form') ? 'beta_tester' : 'NPC_tester';
     const response = await fetch(`https://btnrstfbvynsmzzxwcfy.supabase.co/rest/v1/${tableName}`, {
       method: "POST",
       headers: {
