@@ -287,6 +287,7 @@ const archetypes = {
 // --- App State ---
 let currentQuestionIndex = 0;
 let userGender = 'female'; // Store user's selected gender
+let dominantType = 'emotional'; // Store user's dominant archetype globally
 let equippedItems = [];
 
 let selectedOptionIndex = null;
@@ -758,7 +759,7 @@ function showResults() {
   document.documentElement.style.setProperty('--progress-ratio', 1);
   
   // Determine dominant archetype
-  let dominantType = 'emotional';
+   dominantType = 'emotional';
   let maxScore = -1;
   
   for (const [type, score] of Object.entries(userScores)) {
