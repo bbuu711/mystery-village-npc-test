@@ -800,19 +800,19 @@ function showResults() {
   const btnDetail = document.getElementById('btn-detail');
   
   if (dominantType === 'orderly') {
-    const portraitImg = userGender === 'male' ? 'assets/knight_male_portrait_trans.png' : 'assets/knight_female_portrait_trans.png';
+    const portraitImg = userGender === 'male' ? '/assets/knight_male_portrait_trans.png' : '/assets/knight_female_portrait_trans.png';
     previewContainer.innerHTML = `<img src="${portraitImg}">`;
     btnDetail.style.display = 'block';
   } else if (dominantType === 'social') {
-    const portraitImg = userGender === 'male' ? 'assets/activity_male_portrait_trans.png' : 'assets/activity_female_portrait_trans.png';
+    const portraitImg = userGender === 'male' ? '/assets/activity_male_portrait_trans.png' : '/assets/activity_female_portrait_trans.png';
     previewContainer.innerHTML = `<img src="${portraitImg}">`;
     btnDetail.style.display = 'block';
   } else if (dominantType === 'rational') {
-    const portraitImg = userGender === 'male' ? 'assets/scholar_male_portrait_trans.png' : 'assets/scholar_female_portrait_trans.png';
+    const portraitImg = userGender === 'male' ? '/assets/scholar_male_portrait_trans.png' : '/assets/scholar_female_portrait_trans.png';
     previewContainer.innerHTML = `<img src="${portraitImg}">`;
     btnDetail.style.display = 'block';
   } else if (dominantType === 'emotional') {
-    const portraitImg = userGender === 'male' ? 'assets/poet_male_portrait_trans.png' : 'assets/poet_female_portrait_trans.png';
+    const portraitImg = userGender === 'male' ? '/assets/poet_male_portrait_trans.png' : '/assets/poet_female_portrait_trans.png';
     previewContainer.innerHTML = `<img src="${portraitImg}">`;
     btnDetail.style.display = 'block';
   } else {
@@ -834,11 +834,13 @@ if (btnDetail) {
     const modal = document.getElementById('illust-modal');
     const img = document.getElementById('illust-img');
     if (dominantType === 'orderly') {
-      img.src = userGender === 'male' ? 'assets/knight_male_illust_v2.jpg' : 'assets/knight_female_illust_v2.jpg';
+      img.src = userGender === 'male' ? '/assets/knight_male_illust_v2.jpg' : '/assets/knight_female_illust_v2.jpg';
     } else if (dominantType === 'social') {
-      img.src = userGender === 'male' ? 'assets/activity_male_illust.jpg' : 'assets/activity_female_illust.jpg';
+      img.src = userGender === 'male' ? '/assets/activity_male_illust.jpg' : '/assets/activity_female_illust.jpg';
     } else if (dominantType === 'rational') {
-      img.src = userGender === 'male' ? 'assets/scholar_male_illust.jpg' : 'assets/scholar_female_illust.jpg';
+      img.src = userGender === 'male' ? '/assets/scholar_male_illust.jpg' : '/assets/scholar_female_illust.jpg';
+    } else if (dominantType === 'emotional') {
+      img.src = userGender === 'male' ? '/assets/poet_male_illust.jpg' : '/assets/poet_female_illust.jpg';
     }
     modal.classList.add('active');
   });
