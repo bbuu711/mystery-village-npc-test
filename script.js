@@ -811,6 +811,10 @@ function showResults() {
     const portraitImg = userGender === 'male' ? 'assets/scholar_male_portrait_trans.png' : 'assets/scholar_female_portrait_trans.png';
     previewContainer.innerHTML = `<img src="${portraitImg}">`;
     btnDetail.style.display = 'block';
+  } else if (dominantType === 'emotional') {
+    const portraitImg = userGender === 'male' ? 'assets/poet_male_portrait_trans.png' : 'assets/poet_female_portrait_trans.png';
+    previewContainer.innerHTML = `<img src="${portraitImg}">`;
+    btnDetail.style.display = 'block';
   } else {
     // Fallback badge icon for other types
     previewContainer.innerHTML = `<div style="font-size: 3.5rem; text-align: center; line-height: 130px;">${details.badge}</div>`;
