@@ -233,44 +233,44 @@ const quizData = [
 // --- Archetype Mapping ---
 const archetypes = {
   emotional: {
-    name: "슬픈 눈의 감성 시인",
+    name: "생각에 잠긴 감성 시인",
     badge: "✍️",
     tagline: "#감성주의 #예술가 #따뜻한_치유",
     description: "마법사의 장난으로 감정이 늘 겉돌지만, 깊은 내면에는 따뜻한 온기가 가득한 NPC입니다. 슬픈 눈으로 웃으며 마을 한편에서 조용히 풍경을 그리거나 음악을 연주하고 있을 거예요. 이 NPC와 친해지면 숨겨진 히든 에피소드를 감상할 수 있습니다.",
     item: "노을빛 엽서",
     interaction: "조용한 산책 동행",
-    compatPerfect: "파티 러버 홈데코레이터",
-    compatWorst: "묵묵한 완벽주의 가이드"
+    compatPerfect: "어딜가나 눈에 띄는 활동가",
+    compatWorst: "묵묵하게 곁을 지키는 기사"
   },
   rational: {
-    name: "냉철한 전략가 연금술사",
+    name: "냉철한 분석가 학자",
     badge: "🧪",
     tagline: "#전략가 #이성적 #스킬마스터 #효율중심",
     description: "마을의 얽히고설킨 마법의 코드를 해독하기 위해 밤낮으로 분석하는 전략가형 NPC입니다. 늘 이성적이고 차분하지만, 마을 축제나 모험의 승리 공식을 설계해 주는 든든한 동반자입니다. 성장을 돕는 핵심 가이드를 제공합니다.",
     item: "비밀의 나침반",
     interaction: "스킬트리 분석 상담",
-    compatPerfect: "묵묵한 완벽주의 가이드",
-    compatWorst: "파티 러버 홈데코레이터"
+    compatPerfect: "묵묵하게 곁을 지키는 기사",
+    compatWorst: "어딜가나 눈에 띄는 활동가"
   },
   social: {
-    name: "파티 러버 홈데코레이터",
+    name: "어딜가나 눈에 띄는 활동가",
     badge: "🎉",
     tagline: "#다정다감 #파티러버 #소중한서약 #인맥도감",
     description: "우울한 미스터리 마을을 밝히기 위해 매일 아기자기한 홈파티를 기획하는 활기찬 NPC입니다! 수많은 모임 일정과 소중한 인연을 맺는 것이 가장 큰 낙입니다. 이 NPC의 집에 초대받으면 온갖 귀여운 수집품들을 구경할 수 있습니다.",
     item: "은하수 전구",
     interaction: "러블리 홈파티 초대",
-    compatPerfect: "슬픈 눈의 감성 시인",
-    compatWorst: "냉철한 전략가 연금술사"
+    compatPerfect: "생각에 잠긴 감성 시인",
+    compatWorst: "냉철한 분석가 학자"
   },
   orderly: {
-    name: "묵묵한 완벽주의 가이드",
+    name: "묵묵하게 곁을 지키는 기사",
     badge: "🛡️",
     tagline: "#완벽주의 #성실한비서 #규칙적인일과 #도감수집",
     description: "마을의 질서와 가이드라인을 철저히 지키는 듬직한 NPC입니다. 묵묵히 정해진 일과와 아르바이트를 해내며, 마을의 역사와 규칙을 기록합니다. 처음에는 다가가기 어렵지만, 시간이 지날수록 누구보다 단단한 의지가 되어줍니다.",
     item: "가죽 양장본 일기장",
     interaction: "마을 순찰 동행",
-    compatPerfect: "냉철한 전략가 연금술사",
-    compatWorst: "슬픈 눈의 감성 시인"
+    compatPerfect: "냉철한 분석가 학자",
+    compatWorst: "생각에 잠긴 감성 시인"
   }
 };
 
