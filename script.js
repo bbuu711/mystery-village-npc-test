@@ -818,7 +818,9 @@ btnSubmit.addEventListener('click', async () => {
       npc_type: npcType,
       items: itemsStr
     };
-    const response = await fetch("https://btnrstfbvynsmzzxwcfy.supabase.co/rest/v1/beta_testers", {
+    // Route dynamically: beta_testers if form exists, standard_results if it is the standard version
+    const tableName = document.getElementById('screen-form') ? 'beta_testers' : 'standard_results';
+    const response = await fetch(`https://btnrstfbvynsmzzxwcfy.supabase.co/rest/v1/${tableName}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
