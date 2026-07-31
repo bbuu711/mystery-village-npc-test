@@ -799,12 +799,12 @@ function showResults() {
   const btnDetail = document.getElementById('btn-detail');
   
   if (dominantType === 'orderly') {
-    const pixelImg = userGender === 'male' ? 'assets/knight_male_pixel.png' : 'assets/knight_female_pixel.png';
-    previewContainer.innerHTML = `<img src="${pixelImg}" style="height: 100px; width: auto; image-rendering: pixelated; margin: 0 auto; display: block;">`;
+    const portraitImg = userGender === 'male' ? 'assets/knight_male_portrait.jpg' : 'assets/knight_female_portrait.jpg';
+    previewContainer.innerHTML = `<img src="${portraitImg}" style="width: 100%; height: 100%; object-fit: cover; display: block;">`;
     btnDetail.style.display = 'block';
   } else {
     // Fallback badge icon for other types
-    previewContainer.innerHTML = `<div style="font-size: 3rem; text-align: center; line-height: 60px;">${details.badge}</div>`;
+    previewContainer.innerHTML = `<div style="font-size: 3.5rem; text-align: center; line-height: 130px;">${details.badge}</div>`;
     btnDetail.style.display = 'none';
   }
   
@@ -820,7 +820,7 @@ if (btnDetail) {
     sound.playClick();
     const modal = document.getElementById('illust-modal');
     const img = document.getElementById('illust-img');
-    img.src = userGender === 'male' ? 'assets/knight_male_illust.jpg' : 'assets/knight_female_illust.jpg';
+    img.src = userGender === 'male' ? 'assets/knight_male_illust_v2.jpg' : 'assets/knight_female_illust_v2.jpg';
     modal.classList.add('active');
   });
 }
