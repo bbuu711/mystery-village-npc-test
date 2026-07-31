@@ -783,11 +783,11 @@ body {
 /* Character Animation Styles */
 .game-character {
   position: absolute;
-  width: 60px;
-  height: 96px;
-  background-image: url('character.png');
-  background-size: 240px 96px;
-  background-position: -180px 0; /* Right facing by default */
+  width: 55px;
+  height: 80px;
+  background-image: url('assets/male_walking.png');
+  background-size: 800% 100%; /* 8 horizontal frames */
+  background-position: 0 0;
   pointer-events: none;
   z-index: 1000;
   display: none; /* Hidden until activated */
@@ -796,7 +796,7 @@ body {
 }
 
 .game-character.walking {
-  animation: bob 0.4s infinite alternate;
+  animation: maleWalkCycle 0.8s steps(7) infinite;
 }
 
 .game-character.jumping {
@@ -1087,4 +1087,53 @@ body {
 @keyframes ariaBob {
   0% { transform: translateX(-50%) translateY(0) rotate(-1deg); }
   100% { transform: translateX(-50%) translateY(-5px) rotate(1deg); }
+}
+
+@keyframes maleWalkCycle {
+  from { background-position: 0% 0; }
+  to { background-position: 100% 0; }
+}
+
+/* Modal styles for In-game Illustration details */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  border: 2px solid #fde047;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(253, 224, 71, 0.3);
+  background: #111;
+}
+.modal-content img {
+  display: block;
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+.close-modal {
+  position: absolute;
+  top: 10px; right: 15px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }

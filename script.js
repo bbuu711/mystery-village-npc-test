@@ -155,6 +155,16 @@ function initParticles() {
 // --- Quiz Data ---
 const quizData = [
   {
+    type: 'gender',
+    systemMessage: "[모닥불] \"마을로 들어가기 전에, 네 영혼의 성별을 먼저 선택할게.\"",
+    title: "STEP 0. 성별 설정",
+    question: "당신의 성별을 선택해주세요.",
+    options: [
+      { text: "👩 여자 (Female)", gender: "female", scores: {} },
+      { text: "👨 남자 (Male)", gender: "male", scores: {} }
+    ]
+  },
+  {
     type: 'single',
     systemMessage: "[모닥불] \"당신이 게임 속 NPC가 된다면 어떤 캐릭터일까요?\n첫 번째 질문부터 차근차근 시작해보자.\"",
     title: "STEP 1. NPC 성격 설정",
@@ -276,6 +286,7 @@ const archetypes = {
 
 // --- App State ---
 let currentQuestionIndex = 0;
+let userGender = 'female'; // Store user's selected gender
 let equippedItems = [];
 
 let selectedOptionIndex = null;
@@ -572,11 +583,17 @@ function loadQuestion(index) {
   
   const qData = quizData[index];
   
-  // Update progress bar
-  const percentage = (index / quizData.length) * 100;
-  progressBar.style.width = `${percentage}%`;
-  progressText.textContent = `${index + 1} / ${quizData.length}`;
-  document.documentElement.style.setProperty('--progress-ratio', index / (quizData.length - 1));
+  // Update progress bar (STEP 0 is excluded from step counting)
+  let percentage = 0;
+  if (index === 0) {
+    progressBar.style.width = '0%';
+    progressText.textContent = '준비 단계';
+  } else {
+    percentage = ((index - 1) / (quizData.length - 1)) * 100;
+    progressBar.style.width = `${percentage}%`;
+    progressText.textContent = `${index} / ${quizData.length - 1}`;
+    document.documentElement.style.setProperty('--progress-ratio', (index - 1) / (quizData.length - 2));
+  }
   
   // Move character
   if (gameCharacter) {
@@ -693,17 +710,22 @@ btnNext.addEventListener('click', () => {
   sound.playConfirm();
   const qData = quizData[currentQuestionIndex];
   
-  // Add scores
-  selectedOptions.forEach(optIdx => {
-    const selectedOption = qData.options[optIdx];
-    if (selectedOption.item) {
-       equippedItems.push(selectedOption.item);
-       renderEquippedItems();
-    }
-    for (const [key, value] of Object.entries(selectedOption.scores)) {
-      userScores[key] += value;
-    }
-  });
+  if (qData.type === 'gender') {
+    const selectedOption = qData.options[selectedOptions[0]];
+    userGender = selectedOption.gender;
+  } else {
+    // Add scores
+    selectedOptions.forEach(optIdx => {
+      const selectedOption = qData.options[optIdx];
+      if (selectedOption.item) {
+         equippedItems.push(selectedOption.item);
+         renderEquippedItems();
+      }
+      for (const [key, value] of Object.entries(selectedOption.scores)) {
+        userScores[key] += value;
+      }
+    });
+  }
   
   if (currentQuestionIndex + 1 < quizData.length) {
     loadQuestion(currentQuestionIndex + 1);

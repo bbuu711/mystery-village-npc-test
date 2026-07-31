@@ -199,13 +199,21 @@
           </div>
         </div>
 
-        <div class="result-footer">
-          <button class="btn btn-primary submit-btn" id="btn-submit">제출</button>
+        <div class="result-footer" style="display: flex; gap: 12px; align-items: center;">
+          <button class="btn btn-primary submit-btn" id="btn-submit" style="flex: 1; margin-top: 15px;">제출</button>
+          <button class="btn btn-secondary" id="btn-detail" style="flex: 1; background: #fff; color: #111; border: none; font-weight: bold; font-size: 20px; padding: 18px 0; border-radius: 12px; margin-top: 15px; box-shadow: 0 6px 20px rgba(255,255,255,0.15); display: none;">자세히 보기</button>
         </div>
       </div>
     </div>
   </div>
 
   <script src="script.js"></script>
+  <!-- Modal for showing in-game illustration detail -->
+  <div id="illust-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <img id="illust-img" src="" alt="세계관 속 일러스트">
+    </div>
+  </div>
 </body>
 </html>
