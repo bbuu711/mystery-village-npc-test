@@ -912,7 +912,11 @@ btnSubmit.addEventListener('click', async () => {
     });
 
     if (!response.ok) {
-      throw new Error("서버 응답 오류: " + response.status);
+      let errBody = "";
+      try {
+        errBody = await response.text();
+      } catch(e) {}
+      throw new Error(`서버 응답 오류 (${response.status}): ${errBody}`);
     }
 
     alert("베타테스트 결과가 성공적으로 제출되었습니다!\n소중한 의견 감사드립니다.");
@@ -923,7 +927,7 @@ btnSubmit.addEventListener('click', async () => {
     // Keep it disabled so they don't submit twice
   } catch (error) {
     console.error("Submission error:", error);
-    alert("데이터 저장 중 오류가 발생했습니다. 다시 시도해 주세요.");
+    alert(`데이터 저장 중 오류가 발생했습니다.\n상세 정보: ${error.message}\n다시 시도해 주세요.`);
     btnSubmit.disabled = false;
     btnSubmit.textContent = originalText;
     btnSubmit.style.opacity = "1";
