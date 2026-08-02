@@ -288,6 +288,7 @@ const archetypes = {
 let currentQuestionIndex = 0;
 let userGender = 'female'; // Store user's selected gender
 let dominantType = 'emotional'; // Store user's dominant archetype globally
+let userChoices = []; // Store user's choices for each question
 let equippedItems = [];
 
 let selectedOptionIndex = null;
@@ -711,13 +712,16 @@ btnNext.addEventListener('click', () => {
   sound.playConfirm();
   const qData = quizData[currentQuestionIndex];
   
-  if (qData.type === 'gender') {
+    if (qData.type === 'gender') {
     const selectedOption = qData.options[selectedOptions[0]];
     userGender = selectedOption.gender;
+    userChoices[0] = selectedOption.text;
   } else {
+    const chosenTexts = [];
     // Add scores
     selectedOptions.forEach(optIdx => {
       const selectedOption = qData.options[optIdx];
+      chosenTexts.push(selectedOption.text);
       if (selectedOption.item) {
          equippedItems.push(selectedOption.item);
          renderEquippedItems();
@@ -726,6 +730,7 @@ btnNext.addEventListener('click', () => {
         userScores[key] += value;
       }
     });
+    userChoices[currentQuestionIndex] = chosenTexts.join(', ');
   }
   
   if (currentQuestionIndex + 1 < quizData.length) {
@@ -890,13 +895,15 @@ btnSubmit.addEventListener('click', async () => {
     const npcType = npcTypeEl ? npcTypeEl.textContent : 'Unknown';
     const itemsStr = equippedItems.filter(i => i).join(', ');
 
+    const answersStr = userChoices.filter(c => c).join('\n');
     const payload = {
       name: betaName ? betaName.value.trim() : "Unknown",
       age: betaAge ? betaAge.value.trim() : "Unknown",
       job: betaJob ? betaJob.value.trim() : "Unknown",
       contact: betaContact ? betaContact.value.trim() : "Unknown",
       npc_type: npcType,
-      items: itemsStr
+      items: itemsStr,
+      answers: answersStr
     };
     // Route dynamically: beta_testers if form exists, standard_results if it is the standard version
     const tableName = document.getElementById('screen-form') ? 'beta_tester' : 'NPC_tester';
