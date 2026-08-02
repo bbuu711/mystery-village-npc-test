@@ -896,15 +896,25 @@ btnSubmit.addEventListener('click', async () => {
     const itemsStr = equippedItems.filter(i => i).join(', ');
 
     const answersStr = userChoices.filter(c => c).join('\n');
-    const payload = {
-      name: betaName ? betaName.value.trim() : "Unknown",
-      age: betaAge ? betaAge.value.trim() : "Unknown",
-      job: betaJob ? betaJob.value.trim() : "Unknown",
-      contact: betaContact ? betaContact.value.trim() : "Unknown",
-      npc_type: npcType,
-      items: itemsStr,
-      answers: answersStr
-    };
+    const isBeta = !!document.getElementById('screen-form');
+    let payload;
+    if (isBeta) {
+      payload = {
+        name: betaName ? betaName.value.trim() : "Unknown",
+        age: betaAge ? betaAge.value.trim() : "Unknown",
+        job: betaJob ? betaJob.value.trim() : "Unknown",
+        contact: betaContact ? betaContact.value.trim() : "Unknown",
+        npc_type: npcType,
+        items: itemsStr,
+        answers: answersStr
+      };
+    } else {
+      payload = {
+        npc_type: npcType,
+        items: itemsStr,
+        answers: answersStr
+      };
+    }
     // Route dynamically: beta_testers if form exists, standard_results if it is the standard version
     const tableName = document.getElementById('screen-form') ? 'beta_tester' : 'NPC_tester';
     const response = await fetch(`https://btnrstfbvynsmzzxwcfy.supabase.co/rest/v1/${tableName}`, {
