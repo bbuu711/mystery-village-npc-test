@@ -898,6 +898,7 @@ btnSubmit.addEventListener('click', async () => {
     const answersStr = userChoices.filter(c => c).join('\n');
     const isBeta = !!document.getElementById('screen-form');
     let payload;
+    const nowTimestamp = new Date().toISOString(); // Current date and time in ISO format
     if (isBeta) {
       payload = {
         name: betaName ? betaName.value.trim() : "Unknown",
@@ -906,13 +907,15 @@ btnSubmit.addEventListener('click', async () => {
         contact: betaContact ? betaContact.value.trim() : "Unknown",
         npc_type: npcType,
         items: itemsStr,
-        answers: answersStr
+        answers: answersStr,
+        created_at: nowTimestamp
       };
     } else {
       payload = {
         npc_type: npcType,
         items: itemsStr,
-        answers: answersStr
+        answers: answersStr,
+        created_at: nowTimestamp
       };
     }
     // Route dynamically: beta_testers if form exists, standard_results if it is the standard version
