@@ -659,6 +659,12 @@ quizSystemBox.addEventListener('click', () => {
         introMsgIndex++;
         currentStepState = 'typing';
         dialogNextIndicator.style.display = 'none';
+        
+        // Revert to yellow when loading the third message (index 2)
+        if (introMsgIndex === 2) {
+          quizSystemBox.classList.remove('pink-system');
+        }
+        
         typeText(quizSystemText, introMessages[introMsgIndex], () => {
           currentStepState = 'waiting_click';
           dialogNextIndicator.style.display = 'block';
