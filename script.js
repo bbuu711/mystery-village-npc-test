@@ -202,6 +202,13 @@ const quizData = [
     ]
   },
   {
+    type: 'essay',
+    systemMessage: "[모닥불] \"그 해시태그를 선택한 특별한 이유가 있니?\"",
+    title: "STEP 3 꼬리 질문",
+    question: "왜 **{prev_choice}**를 메인 해시태그로 골랐나요?",
+    options: []
+  },
+  {
     type: 'multiple',
     systemMessage: "[모닥불] \"아하, 그렇구나.\n그럼 이제 네가 숨기고 있는 히든 설정을 엿볼까? (여러 개 골라도 돼)\"",
     title: "STEP 4. 💬 NPC 회복 시 공개되는 설정",
@@ -214,10 +221,11 @@ const quizData = [
     ]
   },
   {
-    type: 'single',
+    type: 'multiple',
+    maxChoices: 2,
     systemMessage: "[모닥불] \"마지막이야.\n아무도 모르는 네 마음속 '틈'을 들여다볼게.\"",
     title: "STEP 5. 마음속 ‘틈’",
-    question: "모든 NPC에게는 플레이어가 쉽게 볼 수 없는 **‘틈’**이 존재합니다.\n가장 공감되는 문장을 선택해주세요.",
+    question: "모든 NPC에게는 플레이어가 쉽게 볼 수 없는 **‘틈’**이 존재합니다.\n가장 공감되는 문장을 선택해주세요. (최대 2개 선택 가능)",
     options: [
       { text: "항상 괜찮은 척하지만 혼자 생각이 많다.", scores: { emotional: 2, rational: 2 } },
       { text: "쉬고 싶지만 계속 달려야 할 것 같다.", scores: { orderly: 3, rational: 1 } },
@@ -225,6 +233,13 @@ const quizData = [
       { text: "진짜 내 모습을 아직 잘 모르겠다.", scores: { orderly: 2, social: 2 } },
       { text: "사람들과 함께 있어도 가끔 외롭다.", scores: { social: 2, emotional: 2 } }
     ]
+  },
+  {
+    type: 'essay',
+    systemMessage: "[모닥불] \"너의 그 '틈'에 대해 조금 더 이야기해줄래?\"",
+    title: "STEP 5 꼬리 질문",
+    question: "왜 그 틈(**{prev_choice}**)이 가장 공감되나요?\n그렇게 생각한 계기도 있나요?",
+    options: []
   }
 ];
 
@@ -567,6 +582,12 @@ let currentStepState = 'typing'; // typing -> waiting_click -> question
 let selectedOptions = []; // Array to store multiple selections
 
 function loadQuestion(index) {
+  // Handle pink theme class for pre-gender intro messages
+  if (index === 0) {
+    quizSystemBox.classList.add('pink-system');
+  } else {
+    quizSystemBox.classList.remove('pink-system');
+  }
   currentQuestionIndex = index;
   selectedOptions = [];
   btnNext.disabled = true;
@@ -675,31 +696,57 @@ quizSystemBox.addEventListener('click', () => {
       currentStepState = 'question';
       dialogNextIndicator.style.display = 'none';
       
-      // Convert bold to span if any
-      let formattedQ = qData.question.replace(/\*\*(.*?)\*\*/g, '<span style="color:#ff6b6b;font-weight:bold;">$1</span>');
+      // Convert bold to span if any and interpolate previous choice if needed
+      let rawQuestion = qData.question;
+      if (rawQuestion.includes('{prev_choice}')) {
+        const prevChoice = userChoices[currentQuestionIndex - 1] || '';
+        rawQuestion = rawQuestion.replace('{prev_choice}', prevChoice);
+      }
+      let formattedQ = rawQuestion.replace(/\*\*(.*?)\*\*/g, '<span style="color:#ff6b6b;font-weight:bold;">$1</span>');
       
       questionTitle.innerHTML = `<span style="color:#aaa; font-size:14px;">${qData.title}</span><br><br>${formattedQ}`;
       optionsList.innerHTML = '';
       
-      qData.options.forEach((opt, idx) => {
-        const optionEl = document.createElement('div');
-        optionEl.className = 'option-item';
-        
-        if (qData.type === 'multiple') {
-          optionEl.innerHTML = `
-            <div class="option-checkbox"></div>
-            <div class="option-text">${opt.text}</div>
-          `;
-        } else {
-          optionEl.innerHTML = `
-            <div class="option-radio"><div class="option-radio-dot"></div></div>
-            <div class="option-text">${opt.text}</div>
-          `;
-        }
-        
-        optionEl.addEventListener('click', () => selectOption(idx, qData.type));
-        optionsList.appendChild(optionEl);
-      });
+      if (qData.type === 'essay') {
+        optionsList.innerHTML = `
+          <div class="essay-container">
+            <textarea id="essay-input" placeholder="여기에 답변을 작성해주세요..."></textarea>
+          </div>
+        `;
+        const essayInput = document.getElementById('essay-input');
+        essayInput.addEventListener('input', () => {
+          const val = essayInput.value.trim();
+          if (val.length > 0) {
+            btnNext.disabled = false;
+            btnNext.classList.remove('btn-disabled');
+            selectedOptions = [val];
+          } else {
+            btnNext.disabled = true;
+            btnNext.classList.add('btn-disabled');
+            selectedOptions = [];
+          }
+        });
+      } else {
+        qData.options.forEach((opt, idx) => {
+          const optionEl = document.createElement('div');
+          optionEl.className = 'option-item';
+          
+          if (qData.type === 'multiple') {
+            optionEl.innerHTML = `
+              <div class="option-checkbox"></div>
+              <div class="option-text">${opt.text}</div>
+            `;
+          } else {
+            optionEl.innerHTML = `
+              <div class="option-radio"><div class="option-radio-dot"></div></div>
+              <div class="option-text">${opt.text}</div>
+            `;
+          }
+          
+          optionEl.addEventListener('click', () => selectOption(idx, qData.type));
+          optionsList.appendChild(optionEl);
+        });
+      }
       
       quizCard.style.display = 'block';
     }
@@ -730,6 +777,12 @@ function selectOption(index, type) {
       selectedOptions.splice(arrIdx, 1);
       items[index].classList.remove('selected');
     } else {
+      const qData = quizData[currentQuestionIndex];
+      const limit = qData.maxChoices || 999;
+      if (selectedOptions.length >= limit) {
+        alert(`최대 ${limit}개까지만 선택할 수 있습니다.`);
+        return;
+      }
       selectedOptions.push(index);
       items[index].classList.add('selected');
     }
@@ -763,6 +816,9 @@ btnNext.addEventListener('click', () => {
     const selectedOption = qData.options[selectedOptions[0]];
     userGender = selectedOption.gender;
     userChoices[0] = selectedOption.text;
+  } else if (qData.type === 'essay') {
+    const prefix = (currentQuestionIndex === 4) ? "[해시태그 이유] " : "[공감 계기] ";
+    userChoices[currentQuestionIndex] = prefix + selectedOptions[0];
   } else {
     const chosenTexts = [];
     // Add scores
