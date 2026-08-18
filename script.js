@@ -178,33 +178,21 @@ const quizData = [
   },
   {
     type: 'single',
-    systemMessage: "[모닥불] \"음, 그렇구나.\n그럼 평소엔 주로 어디서 시간을 보내?\"",
-    title: "STEP 2. NPC의 일상 (1/2)",
-    question: "가장 많은 시간을 보내는 곳",
-    options: [
-      { text: "학교", scores: { social: 2, orderly: 2 } },
-      { text: "회사", scores: { rational: 2, orderly: 2 } },
-      { text: "집", scores: { emotional: 2, orderly: 1 } },
-      { text: "기타", scores: { social: 1, emotional: 1 } }
-    ]
-  },
-  {
-    type: 'single',
     systemMessage: "[모닥불] \"바쁜 일상이네.\n그럼 쉴 때는 주로 뭐 해?\"",
-    title: "STEP 2. NPC의 일상 (2/2)",
-    question: "쉬는 날에는 주로 어떻게 시간을 보내나요?",
+    title: "STEP 2. NPC의 일상",
+    question: "쉬는 날에는 주로 어떻게 시간을 보내나요?\nex) 주말, 학교/퇴근후",
     options: [
-      { text: "친구를 만난다.", scores: { social: 4 } },
+      { text: "친구 혹은 애인을 만난다.", scores: { social: 4 } },
       { text: "집에서 쉰다(넷플릭스 등).", scores: { emotional: 3, orderly: 1 } },
-      { text: "새로운 곳을 간다.", scores: { emotional: 2, social: 2 } },
-      { text: "취미를 즐긴다.", scores: { rational: 2, orderly: 2 } }
+      { text: "취미를 즐긴다(여행, 맛집탐방, DIY 등).", scores: { emotional: 2, social: 2 } },
+      { text: "자격증/스터디(자기계발) 한다.", scores: { rational: 2, orderly: 2 } }
     ]
   },
   {
     type: 'single',
     systemMessage: "[모닥불] \"이제 너라는 NPC의 '메인 퀘스트'를 알아볼 차례야.\"",
-    title: "STEP 3. 메인 키워드",
-    question: "현재 당신 NPC에게 해당하는\n메인 키워드는 무엇인가요?",
+    title: "STEP 3. 메인 해시태그",
+    question: "현재 당신 NPC에게 해당하는 '틈'에 대한 메인 해시태그는 무엇인가요?\nex) 고민, 관심사 등",
     options: [
       { text: "진로/취업", scores: { rational: 3, orderly: 1 }, item: "🗒️" },
       { text: "인간관계", scores: { social: 3, emotional: 1 }, item: "💌" },
@@ -217,12 +205,12 @@ const quizData = [
     type: 'multiple',
     systemMessage: "[모닥불] \"아하, 그렇구나.\n그럼 이제 네가 숨기고 있는 히든 설정을 엿볼까? (여러 개 골라도 돼)\"",
     title: "STEP 4. 💬 NPC 회복 시 공개되는 설정",
-    question: "플레이어의 틈을 고쳐주면 공개되는 당신 NPC의 히든 설정입니다.\n가장 어울리는 설정을 선택해주세요. (중복 선택 가능)",
+    question: "플레이어와 친밀도 수치를 초과하면 공개되는 당신 NPC의 히든 설정입니다. 가장 어울리는 설정을 선택해주세요.(중복 선택 가능)",
     options: [
-      { text: "🌿 마음을 다스리는 나만의 방법이 있다.", scores: { orderly: 3, rational: 1 } },
-      { text: "🎨 남들과 다른 취향이나 스타일이 있다.", scores: { emotional: 3, social: 1 } },
-      { text: "🧭 소중하게 지키는 가치가 있다.", scores: { rational: 2, orderly: 2 } },
-      { text: "🔒 아직 누구에게도 말하지 못한 비밀이 있다.", scores: { emotional: 4 } }
+      { text: "타투", scores: { orderly: 3, rational: 1 } },
+      { text: "동성애", scores: { emotional: 3, social: 1 } },
+      { text: "종교", scores: { rational: 2, orderly: 2 } },
+      { text: "우울증", scores: { emotional: 4 } }
     ]
   },
   {
@@ -289,6 +277,7 @@ let currentQuestionIndex = 0;
 let userGender = 'female'; // Store user's selected gender
 let dominantType = 'emotional'; // Store user's dominant archetype globally
 let userChoices = []; // Store user's choices for each question
+let introMsgIndex = 0; // Index for pre-gender quiz intro messages
 let equippedItems = [];
 
 let selectedOptionIndex = null;
@@ -610,52 +599,110 @@ function loadQuestion(index) {
   dialogNextIndicator.style.display = 'none';
   currentStepState = 'typing';
   
-  typeText(quizSystemText, qData.systemMessage, () => {
-    currentStepState = 'waiting_click';
-    dialogNextIndicator.style.display = 'block';
-  });
+  if (index === 0) {
+    introMsgIndex = 0;
+    const introMessages = [
+      "[모닥불] \"이제부터 당신의 틈으로 들어가봅시다!\"",
+      "[모닥불] \"당신은 어떤 NPC일까요?\"",
+      "[모닥불] \"마을로 들어가기 전에, 네 영혼의 성별을 먼저 선택할게.\""
+    ];
+    typeText(quizSystemText, introMessages[0], () => {
+      currentStepState = 'waiting_click';
+      dialogNextIndicator.style.display = 'block';
+    });
+  } else {
+    typeText(quizSystemText, qData.systemMessage, () => {
+      currentStepState = 'waiting_click';
+      dialogNextIndicator.style.display = 'block';
+    });
+  }
 }
 
 quizSystemBox.addEventListener('click', () => {
   const qData = quizData[currentQuestionIndex];
   
-  if (currentStepState === 'typing') {
-    skipTyping(quizSystemText, qData.systemMessage, () => {
-      currentStepState = 'waiting_click';
-      dialogNextIndicator.style.display = 'block';
-    });
-  } else if (currentStepState === 'waiting_click') {
-    sound.playClick();
-    currentStepState = 'question';
-    dialogNextIndicator.style.display = 'none';
-    
-    // Convert bold to span if any
-    let formattedQ = qData.question.replace(/\*\*(.*?)\*\*/g, '<span style="color:#ff6b6b;font-weight:bold;">$1</span>');
-    
-    questionTitle.innerHTML = `<span style="color:#aaa; font-size:14px;">${qData.title}</span><br><br>${formattedQ}`;
-    optionsList.innerHTML = '';
-    
-    qData.options.forEach((opt, idx) => {
-      const optionEl = document.createElement('div');
-      optionEl.className = 'option-item';
-      
-      if (qData.type === 'multiple') {
-        optionEl.innerHTML = `
-          <div class="option-checkbox"></div>
-          <div class="option-text">${opt.text}</div>
-        `;
+  if (currentQuestionIndex === 0) {
+    const introMessages = [
+      "[모닥불] \"이제부터 당신의 틈으로 들어가봅시다!\"",
+      "[모닥불] \"당신은 어떤 NPC일까요?\"",
+      "[모닥불] \"마을로 들어가기 전에, 네 영혼의 성별을 먼저 선택할게.\""
+    ];
+    if (currentStepState === 'typing') {
+      skipTyping(quizSystemText, introMessages[introMsgIndex], () => {
+        currentStepState = 'waiting_click';
+        dialogNextIndicator.style.display = 'block';
+      });
+    } else if (currentStepState === 'waiting_click') {
+      sound.playClick();
+      if (introMsgIndex < introMessages.length - 1) {
+        introMsgIndex++;
+        currentStepState = 'typing';
+        dialogNextIndicator.style.display = 'none';
+        typeText(quizSystemText, introMessages[introMsgIndex], () => {
+          currentStepState = 'waiting_click';
+          dialogNextIndicator.style.display = 'block';
+        });
       } else {
-        optionEl.innerHTML = `
-          <div class="option-radio"><div class="option-radio-dot"></div></div>
-          <div class="option-text">${opt.text}</div>
-        `;
+        currentStepState = 'question';
+        dialogNextIndicator.style.display = 'none';
+        
+        let formattedQ = qData.question.replace(/\*\*(.*?)\*\*/g, '<span style="color:#ff6b6b;font-weight:bold;">$1</span>');
+        questionTitle.innerHTML = `<span style="color:#aaa; font-size:14px;">${qData.title}</span><br><br>${formattedQ}`;
+        optionsList.innerHTML = '';
+        
+        qData.options.forEach((opt, idx) => {
+          const optionEl = document.createElement('div');
+          optionEl.className = 'option-item';
+          optionEl.innerHTML = `
+            <div class="option-radio"><div class="option-radio-dot"></div></div>
+            <div class="option-text">${opt.text}</div>
+          `;
+          optionEl.addEventListener('click', () => selectOption(idx, qData.type));
+          optionsList.appendChild(optionEl);
+        });
+        
+        quizCard.style.display = 'block';
       }
+    }
+  } else {
+    if (currentStepState === 'typing') {
+      skipTyping(quizSystemText, qData.systemMessage, () => {
+        currentStepState = 'waiting_click';
+        dialogNextIndicator.style.display = 'block';
+      });
+    } else if (currentStepState === 'waiting_click') {
+      sound.playClick();
+      currentStepState = 'question';
+      dialogNextIndicator.style.display = 'none';
       
-      optionEl.addEventListener('click', () => selectOption(idx, qData.type));
-      optionsList.appendChild(optionEl);
-    });
-    
-    quizCard.style.display = 'block';
+      // Convert bold to span if any
+      let formattedQ = qData.question.replace(/\*\*(.*?)\*\*/g, '<span style="color:#ff6b6b;font-weight:bold;">$1</span>');
+      
+      questionTitle.innerHTML = `<span style="color:#aaa; font-size:14px;">${qData.title}</span><br><br>${formattedQ}`;
+      optionsList.innerHTML = '';
+      
+      qData.options.forEach((opt, idx) => {
+        const optionEl = document.createElement('div');
+        optionEl.className = 'option-item';
+        
+        if (qData.type === 'multiple') {
+          optionEl.innerHTML = `
+            <div class="option-checkbox"></div>
+            <div class="option-text">${opt.text}</div>
+          `;
+        } else {
+          optionEl.innerHTML = `
+            <div class="option-radio"><div class="option-radio-dot"></div></div>
+            <div class="option-text">${opt.text}</div>
+          `;
+        }
+        
+        optionEl.addEventListener('click', () => selectOption(idx, qData.type));
+        optionsList.appendChild(optionEl);
+      });
+      
+      quizCard.style.display = 'block';
+    }
   }
 });
 
